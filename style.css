@@ -36,3 +36,11 @@ body {
     height: 100%;
     border: none;
 }
+
+.route-card{
+    width: 100%;
+    background-color: white;
+    height: 100px;
+    margin: 4px;
+    padding: 10px;
+}
