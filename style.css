@@ -45,6 +45,7 @@ body {
     height: 100px;
     margin: 4px;
     padding: 10px;
+    border-radius: 5px;
 }
 
 .route-card-selected{
@@ -53,5 +54,28 @@ body {
     height: 100px;
     margin: 4px;
     padding: 10px;
+    border-radius: 5px;
     border: 2px solid green;
+}
+
+#handle{
+    transform: rotate(90deg);
+}
+
+.toggle{
+    border: none;
+    width: 20px;
+}
+
+.sidebar{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.cards{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-right: 10px;
 }
