@@ -79,3 +79,12 @@ body {
     flex-direction: column;
     padding-right: 10px;
 }
+
+.branding{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+    margin-bottom: 20px;
+    column-gap: 10px;
+}
