@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bus Tracker</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 </head>
 <body>
     <div class="container">
@@ -21,15 +22,20 @@
         </iframe>
     </div>
     <div class="sidebar">
-        <div class="route-card">
-            <p>MG 114</p>
-            <p>Driver: Firstname Lastname</p>
-            <p>Fare: $0.00</p>
+        <div class="toggle">
+
         </div>
-        <div class="route-card">
-            <p>Sample Bus Route 2</p>
-            <p>Driver: Firstname Lastname</p>
-            <p>Fare: $0.00</p>
+        <div class="cards">
+            <div class="route-card-selected">
+                <p>MG 114</p>
+                <p>Driver: Firstname Lastname</p>
+                <p>Fare: <a href="" >See Fare Options</a></p>
+            </div>
+            <div class="route-card">
+                <p>NT 124</p>
+                <p>Driver: Firstname Lastname</p>
+                <p>Fare: $0.00</p>
+            </div>
         </div>
     </div>
 </body>
