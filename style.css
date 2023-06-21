@@ -22,8 +22,10 @@ body {
 
 .search{
     width: 100%;
-    height: 60px;
+    height: 120px;
     background-color: white;
+    display: flex;
+    flex-direction: column;
 }
 
 #map{
@@ -48,16 +50,6 @@ body {
     border-radius: 5px;
 }
 
-.route-card-selected{
-    width: 100%;
-    background-color: white;
-    height: 100px;
-    margin: 4px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 2px solid green;
-}
-
 #handle{
     transform: rotate(90deg);
 }
@@ -71,6 +63,7 @@ body {
     display: flex;
     flex-direction: row;
     width: 100%;
+    justify-content: center;
 }
 
 .cards{
@@ -78,13 +71,27 @@ body {
     display: flex;
     flex-direction: column;
     padding-right: 10px;
+    align-items: center;
 }
 
 .branding{
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: right;
+    justify-content: center;
     margin-bottom: 20px;
     column-gap: 10px;
+    margin-top: 20px;
+}
+
+.sidebar-search{
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.sidebar-searchbar{
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    padding: 10px;
 }

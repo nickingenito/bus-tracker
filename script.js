@@ -10,7 +10,7 @@ class BusRider {
         startLocation = currentLocation;
     }
     useCustom(){
-        const customLocation = getCustom();
+        let customLocation = document.getElementById("origin").value;
         startLocation = customLocation;
     }
 }

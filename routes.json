@@ -1,0 +1,138 @@
+{"routes" : [
+    {
+        "routeID" : "MG 114",
+        "driver" : "Firstname Lastname",
+        "origin" : "33.211025,-97.146251",
+        "waypoints" : ["33.208244,-97.147459", "33.208278,-97.150049", "33.206803,-97.152148", "33.209621,-97.155453", "33.211532,-97.153609", "33.213704,-97.151497", "33.213977,-97.148428"],
+        "active" : true,
+        "numBuses" : 2
+    },
+    {
+        "routeID" : "NT 124",
+        "driver" : "Firstname Lastname",
+        "origin" : "33.213315,-97.173426",
+        "waypoints" : ["33.215423,-97.166131", "33.218690,-97.147173", "33.211543,-97.144716"],
+        "active" : true,
+        "numBuses" : 1
+    },
+    {
+        "routeID" : "DP 144",
+        "driver" : "Firstname Lastname",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 2
+    },
+    {
+        "routeID" : "CP 154",
+        "driver" : "Firstname Lastname",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 1
+    },
+    {
+        "routeID" : "BST 164",
+        "driver" : "Firstname Lastname",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 1
+    },
+    {
+        "routeID" : "CE 174",
+        "driver" : "Firstname Lastname",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 1
+    },
+    {
+        "routeID" : "DS 184",
+        "driver" : "Firstname Lastname",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 2
+    },
+    {
+        "routeID" : "EOC 194 A",
+        "driver" : "Firstname Lastname",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 2
+    },
+    {
+        "routeID" : "EOC 194 B",
+        "driver" : "Firstname Lastname",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 2
+    },
+    {
+        "routeID" : "AC 101",
+        "driver" : "Firstname Lastname",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 2
+    },
+    {
+        "routeID" : "MGP 113 A",
+        "driver" : "Firstname Lastname",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 2
+    },
+    {
+        "routeID" : "MGP 113 B",
+        "driver" : "Firstname Lastname",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 2
+    },
+    {
+        "routeID" : "MGNR 116",
+        "driver" : "Firstname Lastname",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 2
+    },
+    {
+        "routeID" : "EP 131",
+        "driver" : "Firstname Lastname",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 2
+    },
+    {
+        "routeID" : "DP 143",
+        "driver" : "Firstname Lastname",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 2
+    },
+    {
+        "routeID" : "PE A",
+        "driver" : "Firstname Lastname",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 2
+    },
+    {
+        "routeID" : "PE B",
+        "driver" : "Firstname Lastname",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 2
+    }
+]}

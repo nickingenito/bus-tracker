@@ -11,9 +11,10 @@
 </head>
 <body>
     <div class="container">
-        <div class="search">
-            <input type="text" class="searchbar" placeholder="Enter an Address">
-        </div>
+        <form class="search">
+            <input type="text" class="searchbar" id="origin" placeholder="Current Location">
+            <input type="text" class="searchbar" id="destination" placeholder="Enter an Address">
+        </form>
         <iframe
             id="map"
             referrerpolicy="no-referrer-when-downgrade"
@@ -29,13 +30,16 @@
                 <span class="material-symbols-outlined">directions_bus</span>
                 <h2>NDM Track</h2>
             </div>
+            <div class="sidebar-search">
+                <input type="text" class="sidebar-searchbar" placeholder="Search by Route">
+            </div>
             <button class="route-card" onclick="showRoute(MG114)">
-                <h3>MG 114</h3>
+                <h3>Mean Green - MG 114</h3>
                 <p>Driver: Firstname Lastname</p>
                 <p>Fare: <a href="" >See Fare Options</a></p>
             </button>
             <button class="route-card" onclick="showRoute(NT124)">
-                <h3>NT 124</h3>
+                <h3>North Texas - NT 124</h3>
                 <p>Driver: Firstname Lastname</p>
                 <p>Fare: <a href="" >See Fare Options</a></p>
             </button>
