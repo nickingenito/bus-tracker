@@ -1,0 +1,223 @@
+{"routes" : [
+    {
+        "routeID" : "MG114",
+        "name" : "Mean Green - MG 114",
+        "origin" : "33.211025,-97.146251",
+        "waypoints" : ["33.208244,-97.147459", "33.208278,-97.150049", "33.206803,-97.152148", "33.209621,-97.155453", "33.211532,-97.153609", "33.213704,-97.151497", "33.213977,-97.148428"],
+        "active" : true,
+        "numBuses" : 2,
+        "timepoints" : [{
+                "name": "", 
+                "times" : []
+        }],
+        "stops" : []
+    },
+    {
+        "routeID" : "NT124",
+        "name" : "North Texas - NT 124",
+        "origin" : "33.213315,-97.173426",
+        "waypoints" : ["33.215423,-97.166131", "33.218690,-97.147173", "33.211543,-97.144716"],
+        "active" : true,
+        "numBuses" : 1,
+        "timepoints" : [{
+            "name": "", 
+            "times" : []
+    }],
+    "stops" : []
+    },
+    {
+        "routeID" : "DP144",
+        "name" : "Discovery Park - DP 144",
+        "origin" : "33.211025,-97.146251",
+        "waypoints" : ["33.215786, -97.160066", "33.229685, -97.160977","33.253431, -97.153954","33.214778, -97.159507","33.211849, -97.155069","33.213999, -97.148431"],
+        "active" : true,
+        "numBuses" : 2,
+        "timepoints" : [{
+            "name": "", 
+            "times" : []
+    }],
+    "stops" : []
+    },
+    {
+        "routeID" : "CP154",
+        "name" : "Centre Place - CP 154",
+        "origin" : "33.211025,-97.146251",
+        "waypoints" : ["33.198019, -97.129019"],
+        "active" : true,
+        "numBuses" : 1,
+        "timepoints" : [{
+            "name": "", 
+            "times" : []
+    }],
+    "stops" : []
+    },
+    {
+        "routeID" : "BST164",
+        "name" : "Bernard Street - 164",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 1,
+        "timepoints" : [{
+            "name": "", 
+            "times" : []
+    }],
+    "stops" : []
+    },
+    {
+        "routeID" : "CE174",
+        "name" : "Colorado Express - CE 174",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 1,
+        "timepoints" : [{
+            "name": "", 
+            "times" : []
+    }],
+    "stops" : []
+    },
+    {
+        "routeID" : "DS184",
+        "name" : "Daugherty Street - DS 184",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 2,
+        "timepoints" : [{
+            "name": "", 
+            "times" : []
+    }],
+    "stops" : []
+    },
+    {
+        "routeID" : "EOC194A",
+        "name" : "Evening Off Campus - EOC 194 Path A",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 2,
+        "timepoints" : [{
+            "name": "", 
+            "times" : []
+    }],
+    "stops" : []
+    },
+    {
+        "routeID" : "EOC194B",
+        "name" : "Evening Off Campus - EOC 194 Path B",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 2,
+        "timepoints" : [{
+            "name": "", 
+            "times" : []
+    }],
+    "stops" : []
+    },
+    {
+        "routeID" : "AC101",
+        "name" : "Academic Circulator - AC 101",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 2,
+        "timepoints" : [{
+            "name": "", 
+            "times" : []
+    }],
+    "stops" : []
+    },
+    {
+        "routeID" : "MGP113A",
+        "name" : "Mean Green Plus - MGP 113 Path A",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 2,
+        "timepoints" : [{
+            "name": "", 
+            "times" : []
+    }],
+    "stops" : []
+    },
+    {
+        "routeID" : "MGP113B",
+        "name" : "Mean Green Plus - MGP 113 Path B",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 2,
+        "timepoints" : [{
+            "name": "", 
+            "times" : []
+    }],
+    "stops" : []
+    },
+    {
+        "routeID" : "MGNR116",
+        "name" : "Mean Green Night Rider - MGNR 116",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 2,
+        "timepoints" : [{
+            "name": "", 
+            "times" : []
+    }],
+    "stops" : []
+    },
+    {
+        "routeID" : "EP131",
+        "name" : "Eagle Point - EP 131",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 2,
+        "timepoints" : [{
+            "name": "", 
+            "times" : []
+    }],
+    "stops" : []
+    },
+    {
+        "routeID" : "DP143",
+        "name" : "Discovery Park Saturday - DP 143",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 2,
+        "timepoints" : [{
+            "name": "", 
+            "times" : []
+    }],
+    "stops" : []
+    },
+    {
+        "routeID" : "PEA",
+        "name" : "Parking Express Path A",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 2,
+        "timepoints" : [{
+            "name": "", 
+            "times" : []
+    }],
+    "stops" : []
+    },
+    {
+        "routeID" : "PEB",
+        "name" : "Parking Express Path B",
+        "origin" : "",
+        "waypoints" : [""],
+        "active" : true,
+        "numBuses" : 2,
+        "timepoints" : [{
+            "name": "", 
+            "times" : []
+    }],
+    "stops" : []
+    }
+]}

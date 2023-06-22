@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Tracker</title>
+    <script type='text/javascript' src='config.js'></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <form class="search">
+            <input type="text" class="searchbar" id="origin" placeholder="Current Location">
+            <input type="text" class="searchbar" id="destination" placeholder="Enter an Address">
+        </form>
+        <iframe
+            id="map"
+            referrerpolicy="no-referrer-when-downgrade"
+            src=>
+        </iframe>
+    </div>
+    <div class="sidebar">
+        <button class="toggle" type="button">
+            <span class="material-symbols-outlined" id="handle">drag_handle</span>
+        </button>
+        <div class="cards">
+            <div class="branding">
+                <span class="material-symbols-outlined">directions_bus</span>
+                <h2>NDM Track</h2>
+            </div>
+            <div class="sidebar-search">
+                <input type="text" class="sidebar-searchbar" placeholder="Search by Route">
+            </div>
+            <button class="route-card" onclick="showRoute(MG114)">
+                <h3>Mean Green - MG 114</h3>
+            </button>
+            <button class="route-card" onclick="showRoute(NT124)">
+                <h3>North Texas - NT 124</h3>
+            </button>
+        </div>
+    </div>
+</body>
+</html>
+
