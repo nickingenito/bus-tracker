@@ -1,4 +1,5 @@
 const API_KEY = config.API_KEY;
+let hidden = true;
 
 async function populate() {
     const requestURL = "./routes.json";
@@ -31,4 +32,19 @@ populate();
 
 function showRoute(routeSRC){
     document.getElementById('map').src = routeSRC;
+}
+
+function toggleInactive(){
+    const inactives = document.querySelectorAll(".inactive")
+    if (hidden){
+        inactives.forEach((obj) => {
+            obj.style.display="block";
+        });
+        hidden = false;
+    } else {
+        inactives.forEach((obj) => {
+            obj.style.display="none";
+        });
+        hidden = true;
+    }
 }
