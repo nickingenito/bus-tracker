@@ -81,7 +81,7 @@
         "routeID" : "DS184",
         "name" : "Daugherty Street - DS 184",
         "origin" : "",
-        "waypoints" : [""],
+        "waypoints" : ["33.211025,-97.146251"],
         "active" : true,
         "numBuses" : 2,
         "timepoints" : [{
