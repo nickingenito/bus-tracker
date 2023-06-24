@@ -1,5 +1,4 @@
 const API_KEY = config.API_KEY;
-let hidden = true;
 
 async function populate() {
     const requestURL = "./routes.json";
@@ -36,15 +35,7 @@ function showRoute(routeSRC){
 
 function toggleInactive(){
     const inactives = document.querySelectorAll(".inactive")
-    if (hidden){
-        inactives.forEach((obj) => {
-            obj.style.display="block";
-        });
-        hidden = false;
-    } else {
-        inactives.forEach((obj) => {
-            obj.style.display="none";
-        });
-        hidden = true;
-    }
+    inactives.forEach((obj) => {
+        obj.style.display = obj.style.display === 'block' ? '' : 'block';
+    });
 }
