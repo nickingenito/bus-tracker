@@ -44,7 +44,7 @@ body {
 .route-card{
     width: 100%;
     background-color: white;
-    height: 100px;
+    height: 50px;
     margin: 4px;
     padding: 10px;
     border-radius: 5px;
@@ -94,4 +94,8 @@ body {
     height: 30px;
     border-radius: 5px;
     padding: 10px;
+}
+
+.inactive{
+    display: none;
 }
