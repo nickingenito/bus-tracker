@@ -9,8 +9,17 @@ async function populate() {
     createRoutes(routes);
 }
 
+function showRoute(routeSRC){
+    document.getElementById('map').src = routeSRC;
+}
+
+function alert(){
+    alert("Hello");
+}
+
 function createRoutes(routes){
     const container = document.getElementById('route-list');
+    const mapURL = "https://www.google.com/maps/embed/v1/directions?key=" + API_KEY + "&origin=";
 
     for (const route of routes){
         const newRoute = document.createElement('button');
@@ -27,15 +36,11 @@ function createRoutes(routes){
     }
 }
 
-populate();
-
-function showRoute(routeSRC){
-    document.getElementById('map').src = routeSRC;
-}
-
 function toggleInactive(){
     const inactives = document.querySelectorAll(".inactive")
     inactives.forEach((obj) => {
         obj.style.display = obj.style.display === 'block' ? '' : 'block';
     });
 }
+
+populate();
