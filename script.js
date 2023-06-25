@@ -13,10 +13,6 @@ function showRoute(routeSRC){
     document.getElementById('map').src = routeSRC;
 }
 
-function alert(){
-    alert("Hello");
-}
-
 function createRoutes(routes){
     const container = document.getElementById('route-list');
     const mapURL = "https://www.google.com/maps/embed/v1/directions?key=" + API_KEY + "&origin=";
