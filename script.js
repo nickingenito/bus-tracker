@@ -1,5 +1,4 @@
 const API_KEY = config.API_KEY;
-const mapURL = "https://www.google.com/maps/embed/v1/directions?key=" + API_KEY + "&origin=";
 
 async function populate() {
     const requestURL = "./routes.json";
@@ -8,10 +7,6 @@ async function populate() {
     const routes = await response.json();
 
     createRoutes(routes);
-}
-
-function showRoute(routeSRC){
-    document.getElementById('map').src = routeSRC;
 }
 
 function createRoutes(routes){
@@ -39,7 +34,4 @@ function toggleInactive(){
     });
 }
 
-// Display Map for homepage
-showRoute("https://www.google.com/maps/embed/v1/view?key=" + API_KEY + "&center=33.21128520875526,-97.14619021951677&zoom=15");
-// Load JSON
 populate();
