@@ -1,5 +1,3 @@
-const API_KEY = config.API_KEY;
-
 async function populate() {
     const requestURL = "./routes.json";
     const request = new Request(requestURL);
