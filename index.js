@@ -93,14 +93,21 @@ function setMapOnAll(map){
 function addMarkers(map, timepoints){
     setMapOnAll(null);
     markers = [];
+    let counter = 1;
     for (const timepoint of timepoints){
-        console.log(timepoint.coordinates);
         const marker = new google.maps.Marker({
             position: timepoint.coordinates,
             map,
+            label: {
+                text: counter.toString(),
+                fontFamily: "sans-serif",
+                color: "#ffffff",
+                fontSize: "18px",
+            },
             title: timepoint.name,
         });
         markers.push(marker);
+        counter++;
     }
     setMapOnAll(map)
 }
