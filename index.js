@@ -33,7 +33,9 @@ function createRoutes(routes, directionsService, directionsRenderer){
 
 function initMap() {
     const directionsService = new google.maps.DirectionsService();
-    const directionsRenderer = new google.maps.DirectionsRenderer();
+    const directionsRenderer = new google.maps.DirectionsRenderer({
+        suppressMarkers: true
+    });
 
     const myStyles = [{
         featureType: "poi",
