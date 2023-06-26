@@ -16,12 +16,14 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
     for (const route of routes){
         const newRoute = document.createElement('button');
         const newHeader = document.createElement('h3');
+        const newID = document.createElement('p');
 
-        newHeader.textContent = route.name
+        newHeader.textContent = route.name;
         newRoute.classList.add("route-card");
         if(!route.active){
             newRoute.classList.add("inactive");
         }
+        newID.textContent = route.routeID;
 
         const eventHandler = function (){
             calculateAndDisplayRoute(directionsService, directionsRenderer, route.origin, route.waypoints);
@@ -30,6 +32,7 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         newRoute.addEventListener("click", eventHandler);
 
         newRoute.appendChild(newHeader);
+        newRoute.appendChild(newID);
         container.appendChild(newRoute);
     }
 }
@@ -95,6 +98,9 @@ function addMarkers(map, timepoints){
     markers = [];
     let counter = 1;
     for (const timepoint of timepoints){
+        const infoWindow = new google.maps.InfoWindow({
+            content: timepoint.name,
+        })
         const marker = new google.maps.Marker({
             position: timepoint.coordinates,
             map,
@@ -105,6 +111,12 @@ function addMarkers(map, timepoints){
                 fontSize: "18px",
             },
             title: timepoint.name,
+        });
+        marker.addListener("click", () => {
+            infoWindow.open({
+                anchor: marker,
+                map,
+            });
         });
         markers.push(marker);
         counter++;
