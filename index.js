@@ -1,3 +1,5 @@
+let markers = [];
+
 async function populate(map, directionsService, directionsRenderer) {
     const requestURL = "./routes.json";
     const request = new Request(requestURL);
@@ -82,15 +84,25 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
         .catch((e) => window.alert("Directions request failed"));
 }
 
+function setMapOnAll(map){
+    for (let i = 0; i < markers.length; i++){
+        markers[i].setMap(map);
+    }
+}
+
 function addMarkers(map, timepoints){
+    setMapOnAll(null);
+    markers = [];
     for (const timepoint of timepoints){
         console.log(timepoint.coordinates);
-        new google.maps.Marker({
+        const marker = new google.maps.Marker({
             position: timepoint.coordinates,
             map,
             title: timepoint.name,
         });
+        markers.push(marker);
     }
+    setMapOnAll(map)
 }
 
 window.initMap = initMap;
