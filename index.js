@@ -1,14 +1,14 @@
-async function populate(directionsService, directionsRenderer) {
+async function populate(map, directionsService, directionsRenderer) {
     const requestURL = "./routes.json";
     const request = new Request(requestURL);
     const response = await fetch(request);
     const routes = await response.json();
 
     // Dynamically create route cards from JSON
-    createRoutes(routes, directionsService, directionsRenderer);
+    createRoutes(map, routes, directionsService, directionsRenderer);
 }
 
-function createRoutes(routes, directionsService, directionsRenderer){
+function createRoutes(map, routes, directionsService, directionsRenderer){
     const container = document.getElementById('route-list');
 
     for (const route of routes){
@@ -23,6 +23,7 @@ function createRoutes(routes, directionsService, directionsRenderer){
 
         const eventHandler = function (){
             calculateAndDisplayRoute(directionsService, directionsRenderer, route.origin, route.waypoints);
+            addMarkers(map, route.timepoints);
         }
         newRoute.addEventListener("click", eventHandler);
 
@@ -46,17 +47,18 @@ function initMap() {
     const mapOptions = {
         zoom: 15,
         center: { lat: 33.21128520875526, lng: -97.14619021951677 },
-        styles: myStyles
+        styles: myStyles,
     };
 
     const map = new google.maps.Map(document.getElementById("map"), mapOptions);
     directionsRenderer.setMap(map);
 
     // Read JSON file
-    populate(directionsService, directionsRenderer);
+    populate(map, directionsService, directionsRenderer);
 }
 
 function calculateAndDisplayRoute(directionsService, directionsRenderer, origin, waypoints){
+    // Format waypoints from JSON array
     const waypts = [];
     for (let i = 0; i < waypoints.length; i++) {
         waypts.push({
@@ -64,7 +66,7 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
             stopover: true,
         });
     }
-    console.log(waypts);
+
     directionsService
         .route({
             origin: origin,
@@ -78,6 +80,17 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
             const route = response.routes[0];
         })
         .catch((e) => window.alert("Directions request failed"));
+}
+
+function addMarkers(map, timepoints){
+    for (const timepoint of timepoints){
+        console.log(timepoint.coordinates);
+        new google.maps.Marker({
+            position: timepoint.coordinates,
+            map,
+            title: timepoint.name,
+        });
+    }
 }
 
 window.initMap = initMap;

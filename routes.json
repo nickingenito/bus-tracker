@@ -3,48 +3,48 @@
         "routeID" : "MG114",
         "name" : "Mean Green - MG 114",
         "origin" : "33.21128520875526,-97.14619021951677",
-        "waypoints" : ["33.20834151095838,-97.15004461155056", "33.2094185371113, -97.1554634210219", "33.213645551382065,-97.15149490833078"],
+        "waypoints" : ["33.20834151095838,-97.15004461155056", "33.2094185371113, -97.1554634210219", "33.213645551382065,-97.15149490833078", "33.21398014880134,-97.14835708070595"],
         "active" : true,
         "numBuses" : 2,
         "timepoints" : [
             {
                 "name" : "Union Transfer (4th Stop)",
-                "coordinates" : "33.21128520875526,-97.14619021951677", 
+                "coordinates" : { "lat" : 33.21128520875526, "lng" : -97.14619021951677 }, 
                 "times" : []
             },
             {
                 "name" : "Kerr Hall / BLB",
-                "coordinates" : "33.20832641408987,-97.1474643653456", 
+                "coordinates" : { "lat" : 33.20832641408987, "lng" : -97.1474643653456 }, 
                 "times" : [] 
             },
             {
                 "name" : "Maple Hall",
-                "coordinates" : "33.20834151095838,-97.15004461155056", 
+                "coordinates" : { "lat" : 33.20834151095838, "lng" : -97.15004461155056 }, 
                 "times" : [] 
             },
             {
                 "name" : "Honors Hall",
-                "coordinates" : "33.20688190457579,-97.15219019386063", 
+                "coordinates" : { "lat" : 33.20688190457579, "lng" : -97.15219019386063 }, 
                 "times" : [] 
             },
             {
                 "name" : "Fouts Field Transfer",
-                "coordinates" : "33.20942767684717,-97.15527900308146", 
+                "coordinates" : { "lat" : 33.20942767684717, "lng" : -97.15527900308146 }, 
                 "times" : [] 
             },
             {
                 "name" : "Pohl Recreation Center",
-                "coordinates" : "33.21147413101999,-97.15360059511525", 
+                "coordinates" : { "lat" : 33.21147413101999, "lng" : -97.15360059511525 }, 
                 "times" : [] 
             },
             {
                 "name" : "College Inn / EESAT",
-                "coordinates" : "33.213645551382065,-97.15149490833078", 
+                "coordinates" : { "lat" : 33.213645551382065, "lng" : -97.15149490833078 }, 
                 "times" : [] 
             },
             {
                 "name" : "GAB",
-                "coordinates" : "33.21398014880134,-97.14835708070595", 
+                "coordinates" : { "lat" : 33.21398014880134, "lng" : -97.14835708070595 }, 
                 "times" : [] 
             }
         ],
@@ -60,17 +60,17 @@
         "timepoints" : [
             {
                 "name" : "The Retreat",
-                "coordinates" : "33.2133204573233,-97.1733625430157", 
+                "coordinates" : { "lat" : 33.2133204573233, "lng" : -97.1733625430157 }, 
                 "times" : [] 
             },
             {
                 "name" : "University Uptown",
-                "coordinates" : "33.2154045769023,-97.16612561254237", 
+                "coordinates" : { "lat" : 33.2154045769023, "lng" : -97.16612561254237 }, 
                 "times" : [] 
             },
             {
                 "name" : "Union Transfer (7th Stop)",
-                "coordinates" : "33.21148448930265,-97.14471616790681", 
+                "coordinates" : { "lat" : 33.21148448930265, "lng" : -97.14471616790681 }, 
                 "times" : [] 
             }
         ],
@@ -86,42 +86,42 @@
         "timepoints" : [
             {
                 "name" : "Union Transfer (3rd Stop)",
-                "coordinates" : "33.211193677568865,-97.1461975795809", 
+                "coordinates" : { "lat" : 33.211193677568865, "lng" : -97.1461975795809 }, 
                 "times" : [] 
             },
             {
                 "name" : "WB Oak at Thomas",
-                "coordinates" : "33.215865896666536,-97.16004302419591", 
+                "coordinates" : { "lat" : 33.215865896666536, "lng" : -97.16004302419591 }, 
                 "times" : [] 
             },
             {
                 "name" : "NB Bonnie Brae at University",
-                "coordinates" : "33.23118553218214,-97.16088598956007", 
+                "coordinates" : { "lat" : 33.23118553218214, "lng" : -97.16088598956007 }, 
                 "times" : [] 
             },
             {
                 "name" : "Discovery Park (Main)",
-                "coordinates" : "33.25348351671487,-97.15393328538003", 
+                "coordinates" : { "lat" : 33.25348351671487, "lng" : -97.15393328538003 }, 
                 "times" : [] 
             },
             {
                 "name" : "SB Bonnie Brae at University",
-                "coordinates" : "33.230947712694515,-97.16104692210152", 
+                "coordinates" : { "lat" : 33.230947712694515, "lng" : -97.16104692210152 }, 
                 "times" : [] 
             },
             {
                 "name" : "EB Hickory at Ave G",
-                "coordinates" : "33.214748187702206,-97.15797744598693", 
+                "coordinates" : { "lat" : 33.214748187702206, "lng" : -97.15797744598693 }, 
                 "times" : [] 
             },
             {
                 "name" : "Pohl Recreation Center",
-                "coordinates" : "33.21147413101999,-97.15360059511525", 
+                "coordinates" : { "lat" : 33.21147413101999, "lng" : -97.15360059511525 }, 
                 "times" : [] 
             },
             {
                 "name" : "GAB",
-                "coordinates" : "33.21398014880134,-97.14835708070595", 
+                "coordinates" : { "lat" : 33.21398014880134, "lng" : -97.14835708070595 }, 
                 "times" : [] 
             }
         ],
@@ -137,27 +137,27 @@
         "timepoints" : [
             {
                 "name" : "Union Transfer (1st Stop)",
-                "coordinates" : "33.210499816063624, -97.14610188852396", 
+                "coordinates" : { "lat" : 33.210499816063624, "lng" : -97.14610188852396 }, 
                 "times" : [] 
             },
             {
                 "name" : "14 Fifty One",
-                "coordinates" : "33.1980185434746,-97.12909922495463", 
+                "coordinates" : { "lat" : 33.1980185434746, "lng" : -97.12909922495463 }, 
                 "times" : [] 
             },
             {
                 "name" : "The Forum / RedPoint",
-                "coordinates" : "33.19862503877656,-97.13120345074219", 
+                "coordinates" : { "lat" : 33.19862503877656, "lng" : -97.13120345074219 }, 
                 "times" : [] 
             },
             {
                 "name" : "Castle Rock",
-                "coordinates" : "33.19697019959324,-97.1334844921478", 
+                "coordinates" : { "lat" : 33.19697019959324, "lng" : -97.1334844921478 }, 
                 "times" : [] 
             },
             {
                 "name" : "The Venue at Bernart St",
-                "coordinates" : "33.200529206326195,-97.14164277970849", 
+                "coordinates" : { "lat" : 33.200529206326195, "lng" : -97.14164277970849 }, 
                 "times" : [] 
             }
         ],
@@ -173,27 +173,27 @@
         "timepoints" : [
             {
                 "name" : "Union Transfer (2nd Stop)",
-                "coordinates" : "33.21070530639042,-97.1461880104752", 
+                "coordinates" : { "lat" : 33.21070530639042, "lng" : -97.1461880104752 }, 
                 "times" : [] 
             },
             {
                 "name" : "EB Eagle at Bernard St",
-                "coordinates" : "33.20652153004761,-97.14045929619788", 
+                "coordinates" : { "lat" : 33.20652153004761, "lng" : -97.14045929619788 }, 
                 "times" : [] 
             },
             {
                 "name" : "The Gateway at Denton",
-                "coordinates" : "33.204115159310916,-97.1369644402518", 
+                "coordinates" : { "lat" : 33.204115159310916, "lng" : -97.1369644402518 }, 
                 "times" : [] 
             },
             {
                 "name" : "The Venue at Bernard St",
-                "coordinates" : "33.200529206326195,-97.14164277970849", 
+                "coordinates" : { "lat" : 33.200529206326195, "lng" : -97.14164277970849 }, 
                 "times" : [] 
             },
             {
                 "name" : "The Arbors",
-                "coordinates" : "33.203569854049555,-97.14147587818616", 
+                "coordinates" : { "lat" : 33.203569854049555, "lng" : -97.14147587818616 }, 
                 "times" : [] 
             }
         ],
@@ -209,37 +209,37 @@
         "timepoints" : [
             {
                 "name" : "Union Transfer (5th Stop)",
-                "coordinates" : "33.21136714208566,-97.14618163107141", 
+                "coordinates" : { "lat" : 33.21136714208566, "lng" : -97.14618163107141 }, 
                 "times" : [] 
             },
             {
                 "name" : "EB Eagle at Bernard St",
-                "coordinates" : "33.20652153004761,-97.14045929619788", 
+                "coordinates" : { "lat" : 33.20652153004761, "lng" : -97.14045929619788 }, 
                 "times" : [] 
             },
             {
                 "name" : "The Ridge",
-                "coordinates" : "33.186620855991066,-97.10130966204909", 
+                "coordinates" : { "lat" : 33.186620855991066, "lng" : -97.10130966204909 }, 
                 "times" : [] 
             },
             {
                 "name" : "MedPark Station",
-                "coordinates" : "33.18237348371717,-97.09045337815697", 
+                "coordinates" : { "lat" : 33.18237348371717, "lng" : -97.09045337815697 }, 
                 "times" : [] 
             },
             {
                 "name" : "The Venue at Bernard St",
-                "coordinates" : "33.200529206326195,-97.14164277970849", 
+                "coordinates" : { "lat" : 33.200529206326195, "lng" : -97.14164277970849 }, 
                 "times" : [] 
             },
             {
                 "name" : "The Arbors",
-                "coordinates" : "33.203569854049555,-97.14147587818616", 
+                "coordinates" : { "lat" : 33.203569854049555, "lng" : -97.14147587818616 }, 
                 "times" : [] 
             },
             {
                 "name" : "University Place",
-                "coordinates" : "33.205150441308454,-97.14149105105044", 
+                "coordinates" : { "lat" : 33.205150441308454, "lng" : -97.14149105105044 }, 
                 "times" : [] 
             }
         ],
@@ -255,32 +255,32 @@
         "timepoints" : [
             {
                 "name" : "NTX Denton",
-                "coordinates" : "33.20105055774296,-97.13338978789788", 
+                "coordinates" : { "lat" : 33.20105055774296, "lng" : -97.13338978789788 }, 
                 "times" : [] 
             },
             {
                 "name" : "The Arch",
-                "coordinates" : "33.19684496263794,-97.1368369826015", 
+                "coordinates" : { "lat" : 33.19684496263794, "lng" : -97.1368369826015 }, 
                 "times" : [] 
             },
             {
                 "name" : "The Venue at Bernard St",
-                "coordinates" : "33.200529206326195,-97.14164277970849", 
+                "coordinates" : { "lat" : 33.200529206326195, "lng" : -97.14164277970849 }, 
                 "times" : [] 
             },
             {
                 "name" : "University Place",
-                "coordinates" : "33.205150441308454,-97.14149105105044", 
+                "coordinates" : { "lat" : 33.205150441308454, "lng" : -97.14149105105044 }, 
                 "times" : [] 
             },
             {
                 "name" : "Union Transfer (1st Stop)",
-                "coordinates" : "33.210499816063624, -97.14610188852396", 
+                "coordinates" : { "lat" : 33.210499816063624, "lng" : -97.14610188852396 }, 
                 "times" : [] 
             },
             {
                 "name" : "EB Eagle at Bernard St",
-                "coordinates" : "33.20652153004761,-97.14045929619788", 
+                "coordinates" : { "lat" : 33.20652153004761, "lng" : -97.14045929619788 }, 
                 "times" : [] 
             }
         ],
@@ -296,37 +296,37 @@
         "timepoints" : [
             {
                 "name" : "Union Transfer (1st Stop)",
-                "coordinates" : "33.210499816063624, -97.14610188852396", 
+                "coordinates" : { "lat" : 33.210499816063624, "lng" : -97.14610188852396 }, 
                 "times" : [] 
             },
             {
                 "name" : "EB Eagle at Bernard St",
-                "coordinates" : "33.20652153004761,-97.14045929619788", 
+                "coordinates" : { "lat" : 33.20652153004761, "lng" : -97.14045929619788 }, 
                 "times" : [] 
             },
             {
                 "name" : "14 Fifty One",
-                "coordinates" : "33.1980185434746,-97.12909922495463", 
+                "coordinates" : { "lat" : 33.1980185434746, "lng" : -97.12909922495463 }, 
                 "times" : [] 
             },
             {
                 "name" : "The Forum / RedPoint",
-                "coordinates" : "33.19862503877656,-97.13120345074219", 
+                "coordinates" : { "lat" : 33.19862503877656, "lng" : -97.13120345074219 }, 
                 "times" : [] 
             },
             {
                 "name" : "The Venue at Bernard St",
-                "coordinates" : "33.200529206326195,-97.14164277970849", 
+                "coordinates" : { "lat" : 33.200529206326195, "lng" : -97.14164277970849 }, 
                 "times" : [] 
             },
             {
                 "name" : "University Place",
-                "coordinates" : "33.205150441308454,-97.14149105105044", 
+                "coordinates" : { "lat" : 33.205150441308454, "lng" : -97.14149105105044 }, 
                 "times" : [] 
             },
             {
                 "name" : "The Oaks",
-                "coordinates" : "33.210016000485055,-97.1413863953872", 
+                "coordinates" : { "lat" : 33.210016000485055, "lng" : -97.1413863953872 }, 
                 "times" : [] 
             }
         ],
@@ -342,32 +342,32 @@
         "timepoints" : [
             {
                 "name" : "Union Transfer",
-                "coordinates" : "33.210499816063624, -97.14610188852396", 
+                "coordinates" : { "lat" : 33.210499816063624, "lng" : -97.14610188852396 }, 
                 "times" : [] 
             },
             {
                 "name" : "WB Oak at Fry",
-                "coordinates" : "33.21574157685354,-97.14627894982442", 
+                "coordinates" : { "lat" : 33.21574157685354, "lng" : -97.14627894982442 }, 
                 "times" : [] 
             },
             {
                 "name" : "WB Oak at Thomas",
-                "coordinates" : "33.215865896666536,-97.16004302419591", 
+                "coordinates" : { "lat" : 33.215865896666536, "lng" : -97.16004302419591 }, 
                 "times" : [] 
             },
             {
                 "name" : "WB Oak at I-35",
-                "coordinates" : "33.215573385062754,-97.16613905423739", 
+                "coordinates" : { "lat" : 33.215573385062754, "lng" : -97.16613905423739 }, 
                 "times" : [] 
             },
             {
                 "name" : "The Retreat",
-                "coordinates" : "33.2133204573233,-97.1733625430157", 
+                "coordinates" : { "lat" : 33.2133204573233, "lng" : -97.1733625430157 }, 
                 "times" : [] 
             },
             {
                 "name" : "University Uptown",
-                "coordinates" : "33.2154045769023,-97.16612561254237", 
+                "coordinates" : { "lat" : 33.2154045769023, "lng" : -97.16612561254237 }, 
                 "times" : [] 
             }
         ],
@@ -383,12 +383,12 @@
         "timepoints" : [
             {
                 "name" : "Hurley Administration Building",
-                "coordinates" : "33.211563195845194,-97.14866906407636", 
+                "coordinates" : { "lat" : 33.211563195845194, "lng" : -97.14866906407636 }, 
                 "times" : [] 
             },
             {
                 "name" : "Fouts Field Transfer",
-                "coordinates" : "33.20942767684717,-97.15527900308146", 
+                "coordinates" : { "lat" : 33.20942767684717, "lng" : -97.15527900308146 }, 
                 "times" : [] 
             }
         ],
@@ -404,42 +404,42 @@
         "timepoints" : [
             {
                 "name" : "Union Transfer (1st Stop)",
-                "coordinates" : "33.210499816063624, -97.14610188852396", 
+                "coordinates" : { "lat" : 33.210499816063624, "lng" : -97.14610188852396 }, 
                 "times" : [] 
             },
             {
                 "name" : "WB Maple at Ave A",
-                "coordinates" : "33.20829552835664,-97.14581395103532", 
+                "coordinates" : { "lat" : 33.20829552835664, "lng" : -97.14581395103532 }, 
                 "times" : [] 
             },
             {
                 "name" : "Maple Hall",
-                "coordinates" : "33.20834151095838,-97.15004461155056", 
+                "coordinates" : { "lat" : 33.20834151095838, "lng" : -97.15004461155056 }, 
                 "times" : [] 
             },
             {
                 "name" : "Honors Hall",
-                "coordinates" : "33.20688190457579,-97.15219019386063", 
+                "coordinates" : { "lat" : 33.20688190457579, "lng" : -97.15219019386063 }, 
                 "times" : [] 
             },
             {
                 "name" : "Victory Hall",
-                "coordinates" : "33.20176059494551,-97.1586302554423", 
+                "coordinates" : { "lat" : 33.20176059494551, "lng" : -97.1586302554423 }, 
                 "times" : [] 
             },
             {
                 "name" : "Pohl Recreation Center",
-                "coordinates" : "33.21147413101999,-97.15360059511525", 
+                "coordinates" : { "lat" : 33.21147413101999, "lng" : -97.15360059511525 }, 
                 "times" : [] 
             },
             {
                 "name" : "College Inn / EESAT",
-                "coordinates" : "33.213645551382065,-97.15149490833078", 
+                "coordinates" : { "lat" : 33.213645551382065, "lng" : -97.15149490833078 }, 
                 "times" : [] 
             },
             {
                 "name" : "GAB",
-                "coordinates" : "33.21398014880134,-97.14835708070595", 
+                "coordinates" : { "lat" : 33.21398014880134, "lng" : -97.14835708070595 }, 
                 "times" : [] 
             }
         ],
@@ -455,52 +455,52 @@
         "timepoints" : [
             {
                 "name" : "Union Transfer (1st Stop)",
-                "coordinates" : "33.210499816063624, -97.14610188852396", 
+                "coordinates" : { "lat" : 33.210499816063624, "lng" : -97.14610188852396 }, 
                 "times" : [] 
             },
             {
                 "name" : "Welch at Mulberry",
-                "coordinates" : "33.21349650947886,-97.14421390884135", 
+                "coordinates" : { "lat" : 33.21349650947886, "lng" : -97.14421390884135 }, 
                 "times" : [] 
             },
             {
                 "name" : "NB Bonnie Brae at University",
-                "coordinates" : "33.23118553218214,-97.16088598956007", 
+                "coordinates" : { "lat" : 33.23118553218214, "lng" : -97.16088598956007 }, 
                 "times" : [] 
             },
             {
                 "name" : "Discovery Park (Main)",
-                "coordinates" : "33.25348351671487,-97.15393328538003", 
+                "coordinates" : { "lat" : 33.25348351671487, "lng" : -97.15393328538003 }, 
                 "times" : [] 
             },
             {
                 "name" : "SB Bonnie Brae at University",
-                "coordinates" : "33.230947712694515,-97.16104692210152", 
+                "coordinates" : { "lat" : 33.230947712694515, "lng" : -97.16104692210152 }, 
                 "times" : [] 
             },
             {
                 "name" : "Hickory at Ave G",
-                "coordinates" : "33.214748187702206,-97.15797744598693", 
+                "coordinates" : { "lat" : 33.214748187702206, "lng" : -97.15797744598693 }, 
                 "times" : [] 
             },
             {
                 "name" : "North Texas Blvd at Stella",
-                "coordinates" : "33.21386040741777,-97.15512385342747", 
+                "coordinates" : { "lat" : 33.21386040741777, "lng" : -97.15512385342747 }, 
                 "times" : [] 
             },
             {
                 "name" : "Pohl Recreation Center",
-                "coordinates" : "33.21147413101999,-97.15360059511525", 
+                "coordinates" : { "lat" : 33.21147413101999, "lng" : -97.15360059511525 }, 
                 "times" : [] 
             },
             {
                 "name" : "College Inn / EESAT",
-                "coordinates" : "33.213645551382065,-97.15149490833078", 
+                "coordinates" : { "lat" : 33.213645551382065, "lng" : -97.15149490833078 }, 
                 "times" : [] 
             },
             {
                 "name" : "GAB",
-                "coordinates" : "33.21398014880134,-97.14835708070595", 
+                "coordinates" : { "lat" : 33.21398014880134, "lng" : -97.14835708070595 }, 
                 "times" : [] 
             }
         ],
@@ -516,42 +516,42 @@
         "timepoints" : [
             {
                 "name" : "Union Transfer (6th Stop)",
-                "coordinates" : "33.21147157228429,-97.14561853378376", 
+                "coordinates" : { "lat" : 33.21147157228429, "lng" : -97.14561853378376 }, 
                 "times" : [] 
             },
             {
                 "name" : "Kerr Hall / BLB",
-                "coordinates" : "33.20832641408987,-97.1474643653456", 
+                "coordinates" : { "lat" : 33.20832641408987, "lng" : -97.1474643653456 }, 
                 "times" : [] 
             },
             {
                 "name" : "Maple Hall",
-                "coordinates" : "33.20834151095838,-97.15004461155056", 
+                "coordinates" : { "lat" : 33.20834151095838, "lng" : -97.15004461155056 }, 
                 "times" : [] 
             },
             {
                 "name" : "Victory Hall",
-                "coordinates" : "33.20176059494551,-97.1586302554423", 
+                "coordinates" : { "lat" : 33.20176059494551, "lng" : -97.1586302554423 }, 
                 "times" : [] 
             },
             {
                 "name" : "Fouts Field Transfer",
-                "coordinates" : "33.20942767684717,-97.15527900308146", 
+                "coordinates" : { "lat" : 33.20942767684717, "lng" : -97.15527900308146 }, 
                 "times" : [] 
             },
             {
                 "name" : "Pohl Recreation Center",
-                "coordinates" : "33.21147413101999,-97.15360059511525", 
+                "coordinates" : { "lat" : 33.21147413101999, "lng" : -97.15360059511525 }, 
                 "times" : [] 
             },
             {
                 "name" : "College Inn / EESAT",
-                "coordinates" : "33.213645551382065,-97.15149490833078", 
+                "coordinates" : { "lat" : 33.213645551382065, "lng" : -97.15149490833078 }, 
                 "times" : [] 
             },
             {
                 "name" : "GAB",
-                "coordinates" : "33.21398014880134,-97.14835708070595", 
+                "coordinates" : { "lat" : 33.21398014880134, "lng" : -97.14835708070595 }, 
                 "times" : [] 
             }
         ],
@@ -567,42 +567,42 @@
         "timepoints" : [
             {
                 "name" : "Union Transfer (6th Stop)",
-                "coordinates" : "33.21147157228429,-97.14561853378376", 
+                "coordinates" : { "lat" : 33.21147157228429, "lng" : -97.14561853378376 }, 
                 "times" : [] 
             },
             {
                 "name" : "Kerr Hall / BLB",
-                "coordinates" : "33.20832641408987,-97.1474643653456", 
+                "coordinates" : { "lat" : 33.20832641408987, "lng" : -97.1474643653456 }, 
                 "times" : [] 
             },
             {
                 "name" : "Maple Hall",
-                "coordinates" : "33.20834151095838,-97.15004461155056", 
+                "coordinates" : { "lat" : 33.20834151095838, "lng" : -97.15004461155056 }, 
                 "times" : [] 
             },
             {
                 "name" : "Victory Hall",
-                "coordinates" : "33.20176059494551,-97.1586302554423", 
+                "coordinates" : { "lat" : 33.20176059494551, "lng" : -97.1586302554423 }, 
                 "times" : [] 
             },
             {
                 "name" : "Fouts Field Transfer",
-                "coordinates" : "33.20942767684717,-97.15527900308146", 
+                "coordinates" : { "lat" : 33.20942767684717, "lng" : -97.15527900308146 }, 
                 "times" : [] 
             },
             {
                 "name" : "Pohl Recreation Center",
-                "coordinates" : "33.21147413101999,-97.15360059511525", 
+                "coordinates" : { "lat" : 33.21147413101999, "lng" : -97.15360059511525 }, 
                 "times" : [] 
             },
             {
                 "name" : "College Inn / EESAT",
-                "coordinates" : "33.213645551382065,-97.15149490833078", 
+                "coordinates" : { "lat" : 33.213645551382065, "lng" : -97.15149490833078 }, 
                 "times" : [] 
             },
             {
                 "name" : "GAB",
-                "coordinates" : "33.21398014880134,-97.14835708070595", 
+                "coordinates" : { "lat" : 33.21398014880134, "lng" : -97.14835708070595 }, 
                 "times" : [] 
             }
         ],
@@ -618,27 +618,27 @@
         "timepoints" : [
             {
                 "name" : "Discovery Park (Main)",
-                "coordinates" : "33.25348351671487,-97.15393328538003", 
+                "coordinates" : { "lat" : 33.25348351671487, "lng" : -97.15393328538003 }, 
                 "times" : [] 
             },
             {
                 "name" : "SB Bonnie Brae at University",
-                "coordinates" : "33.230947712694515,-97.16104692210152", 
+                "coordinates" : { "lat" : 33.230947712694515, "lng" : -97.16104692210152 }, 
                 "times" : [] 
             },
             {
                 "name" : "GAB",
-                "coordinates" : "33.21398014880134,-97.14835708070595", 
+                "coordinates" : { "lat" : 33.21398014880134, "lng" : -97.14835708070595 }, 
                 "times" : [] 
             },
             {
                 "name" : "Union Transfer (3rd Stop)",
-                "coordinates" : "33.211193677568865,-97.1461975795809", 
+                "coordinates" : { "lat" : 33.211193677568865, "lng" : -97.1461975795809 }, 
                 "times" : [] 
             },
             {
                 "name" : "NB Bonnie Brae at University",
-                "coordinates" : "33.23118553218214,-97.16088598956007", 
+                "coordinates" : { "lat" : 33.23118553218214, "lng" : -97.16088598956007 }, 
                 "times" : [] 
             }
         ],
@@ -654,27 +654,27 @@
         "timepoints" : [
             {
                 "name" : "Apogee Center Lot",
-                "coordinates" : "33.20171528578623,-97.15707486078382", 
+                "coordinates" : { "lat" : 33.20171528578623, "lng" : -97.15707486078382 }, 
                 "times" : [] 
             },
             {
                 "name" : "Apogee Northeast Lot",
-                "coordinates" : "33.202883297433665,-97.15593310265545", 
+                "coordinates" : { "lat" : 33.202883297433665, "lng" : -97.15593310265545 }, 
                 "times" : [] 
             },
             {
                 "name" : "Highland St Parking Garage",
-                "coordinates" : "33.20929500720885,-97.14567671871751", 
+                "coordinates" : { "lat" : 33.20929500720885, "lng" : -97.14567671871751 }, 
                 "times" : [] 
             },
             {
                 "name" : "Lot 20",
-                "coordinates" : "33.20862123074045,-97.1585878329843", 
+                "coordinates" : { "lat" : 33.20862123074045, "lng" : -97.1585878329843 }, 
                 "times" : [] 
             },
             {
                 "name" : "Lot 80",
-                "coordinates" : "33.20159467500107,-97.15737831809415", 
+                "coordinates" : { "lat" : 33.20159467500107, "lng" : -97.15737831809415 }, 
                 "times" : [] 
             }
         ],
@@ -690,22 +690,22 @@
         "timepoints" : [
             {
                 "name" : "Apogee Center Lot",
-                "coordinates" : "33.20171528578623,-97.15707486078382", 
+                "coordinates" : { "lat" : 33.20171528578623, "lng" : -97.15707486078382 }, 
                 "times" : [] 
             },
             {
                 "name" : "Apogee Northeast Lot",
-                "coordinates" : "33.202883297433665,-97.15593310265545", 
+                "coordinates" : { "lat" : 33.202883297433665, "lng" : -97.15593310265545 }, 
                 "times" : [] 
             },
             {
                 "name" : "Lot 20",
-                "coordinates" : "33.20862123074045,-97.1585878329843", 
+                "coordinates" : { "lat" : 33.20862123074045, "lng" : -97.1585878329843 }, 
                 "times" : [] 
             },
             {
                 "name" : "Highland St Parking Garage",
-                "coordinates" : "33.20929500720885,-97.14567671871751", 
+                "coordinates" : { "lat" : 33.20929500720885, "lng" : -97.14567671871751 }, 
                 "times" : [] 
             }
         ],
