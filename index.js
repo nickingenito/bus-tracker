@@ -1,3 +1,36 @@
+async function populate(directionsService, directionsRenderer) {
+    const requestURL = "./routes.json";
+    const request = new Request(requestURL);
+    const response = await fetch(request);
+    const routes = await response.json();
+
+    // Dynamically create route cards from JSON
+    createRoutes(routes, directionsService, directionsRenderer);
+}
+
+function createRoutes(routes, directionsService, directionsRenderer){
+    const container = document.getElementById('route-list');
+
+    for (const route of routes){
+        const newRoute = document.createElement('button');
+        const newHeader = document.createElement('h3');
+
+        newHeader.textContent = route.name
+        newRoute.classList.add("route-card");
+        if(!route.active){
+            newRoute.classList.add("inactive");
+        }
+
+        const eventHandler = function (){
+            calculateAndDisplayRoute(directionsService, directionsRenderer, route.origin, route.waypoints);
+        }
+        newRoute.addEventListener("click", eventHandler);
+
+        newRoute.appendChild(newHeader);
+        container.appendChild(newRoute);
+    }
+}
+
 function initMap() {
     const directionsService = new google.maps.DirectionsService();
     const directionsRenderer = new google.maps.DirectionsRenderer();
@@ -17,29 +50,24 @@ function initMap() {
     const map = new google.maps.Map(document.getElementById("map"), mapOptions);
     directionsRenderer.setMap(map);
 
-    const eventHandler = function (){
-        calculateAndDisplayRoute(directionsService, directionsRenderer, { lat: 33.21128520875526, lng: -97.14619021951677 });
-    }
-
-    document.getElementById("show-map").addEventListener("click", eventHandler);
-    //calculateAndDisplayRoute(directionsService, directionsRenderer, { lat: 33.21128520875526, lng: -97.14619021951677 });
+    // Read JSON file
+    populate(directionsService, directionsRenderer);
 }
 
-function calculateAndDisplayRoute(directionsService, directionsRenderer, origin){
+function calculateAndDisplayRoute(directionsService, directionsRenderer, origin, waypoints){
+    const waypts = [];
+    for (let i = 0; i < waypoints.length; i++) {
+        waypts.push({
+            location: waypoints[i],
+            stopover: true,
+        });
+    }
+    console.log(waypts);
     directionsService
         .route({
-            // origin: { lat: 33.21128520875526, lng: -97.14619021951677 },
             origin: origin,
-            destination: { lat: 33.21128520875526, lng: -97.14619021951677 },
-            waypoints: [
-                {location: {lat: 33.20832641408987, lng: -97.1474643653456 }},
-                {location: {lat: 33.20834151095838, lng: -97.15004461155056}},
-                {location: {lat: 33.20688190457579, lng: -97.15219019386063}},
-                {location: {lat: 33.20942767684717, lng: -97.15527900308146}},
-                {location: {lat: 33.21147413101999, lng: -97.15360059511525}},
-                {location: {lat: 33.213645551382065, lng: -97.15149490833078}},
-                {location: {lat: 33.21398014880134, lng: -97.14835708070595}},
-            ],
+            destination: origin,
+            waypoints: waypts,
             travelMode: google.maps.TravelMode.DRIVING,
         })
         .then((response) => {
@@ -47,11 +75,7 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin)
 
             const route = response.routes[0];
         })
-        .catch((e) => window.alert("Directions request failed due to " + status));
+        .catch((e) => window.alert("Directions request failed"));
 }
 
 window.initMap = initMap;
-
-function addTest(route){
-    route.classList.add("test");
-}
