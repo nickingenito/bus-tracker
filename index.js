@@ -16,7 +16,13 @@ function initMap() {
 
     const map = new google.maps.Map(document.getElementById("map"), mapOptions);
     directionsRenderer.setMap(map);
-    calculateAndDisplayRoute(directionsService, directionsRenderer, { lat: 33.21128520875526, lng: -97.14619021951677 });
+
+    const eventHandler = function (){
+        calculateAndDisplayRoute(directionsService, directionsRenderer, { lat: 33.21128520875526, lng: -97.14619021951677 });
+    }
+
+    document.getElementById("show-map").addEventListener("click", eventHandler);
+    //calculateAndDisplayRoute(directionsService, directionsRenderer, { lat: 33.21128520875526, lng: -97.14619021951677 });
 }
 
 function calculateAndDisplayRoute(directionsService, directionsRenderer, origin){
@@ -41,6 +47,11 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin)
 
             const route = response.routes[0];
         })
+        .catch((e) => window.alert("Directions request failed due to " + status));
 }
 
 window.initMap = initMap;
+
+function addTest(route){
+    route.classList.add("test");
+}
