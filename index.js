@@ -25,6 +25,7 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         }
         newID.textContent = route.routeID;
 
+        // Add event handler to route-cards to display routes
         const eventHandler = function (){
             calculateAndDisplayRoute(directionsService, directionsRenderer, route.origin, route.waypoints);
             addMarkers(map, route.timepoints);
