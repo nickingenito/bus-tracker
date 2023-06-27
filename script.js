@@ -29,6 +29,7 @@ class LinkedList {
     }
 }
 
+
 function toggleInactive(){
     const inactives = document.querySelectorAll(".inactive")
     inactives.forEach((obj) => {
