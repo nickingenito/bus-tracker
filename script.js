@@ -33,6 +33,20 @@ class BusStop {
     }
 }
 
+class Node {
+    constructor(val) {
+        this.value = val;
+        this.next = null;
+    }
+}
+
+class LinkedList {
+    constructor() {
+        this.head = null;
+        this.tail = null;
+    }
+}
+
 const MG114 = "https://www.google.com/maps/embed/v1/directions?key=" + API_KEY + "&origin=33.211025,-97.146251&waypoints=33.208244,-97.147459|33.208278,-97.150049|33.206803,-97.152148|33.209621,-97.155453|33.211532,-97.153609|33.213704,-97.151497|33.213977,-97.148428&destination=33.211025,-97.146251"
 const NT124 = "https://www.google.com/maps/embed/v1/directions?key=" + API_KEY + "&origin=33.213315,-97.173426&waypoints=33.215423,-97.166131|33.218690,-97.147173|33.211543,-97.144716&destination=33.213315,-97.173426"
 
