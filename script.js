@@ -53,3 +53,16 @@ function searchRoutes(){
         }
     }
 }
+
+function getCurrentLocation(){
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                };
+            }
+        );
+    }
+}
