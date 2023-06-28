@@ -14,21 +14,28 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
     const container = document.getElementById('route-list');
 
     for (const route of routes){
+        const textContainer = document.createElement('div');
+        const timeContainer = document.createElement('div');
         const newRoute = document.createElement('button');
         const newHeader = document.createElement('h2');
         const newID = document.createElement('p');
         const nextStop = document.createElement('div');
         const stopText = document.createElement('p');
+        const timeText = document.createElement('h2');
+        const minutes = document.createElement('p');
+
+        textContainer.classList.add("text-container");
+        timeContainer.classList.add("time-container");
 
         newHeader.textContent = route.name;
-        stopText.textContent = "Next Stop: ";
+        stopText.textContent = route.timepoints[0].name;
+        timeText.textContent = "0";
+        minutes.textContent = "minutes";
         nextStop.classList.add("next-stop");
         newRoute.classList.add("route-card");
         newID.classList.add("id");
         newRoute.setAttribute("route-id", route.routeID.toLowerCase());
         newRoute.setAttribute("route-name", route.name.toLowerCase());
-
-
         if(!route.active){
             newRoute.classList.add("inactive");
         }
@@ -41,10 +48,15 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         }
         newRoute.addEventListener("click", eventHandler);
 
-        newRoute.appendChild(newHeader);
-        newRoute.appendChild(newID);
+        timeContainer.appendChild(timeText);
+        timeContainer.appendChild(minutes);
+
+        textContainer.appendChild(newHeader);
+        textContainer.appendChild(newID);
         nextStop.appendChild(stopText);
-        newRoute.appendChild(nextStop);
+        textContainer.appendChild(nextStop);
+        newRoute.appendChild(textContainer);
+        newRoute.appendChild(timeContainer);
         container.appendChild(newRoute);
     }
 }
