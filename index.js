@@ -20,6 +20,8 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
 
         newHeader.textContent = route.name;
         newRoute.classList.add("route-card");
+        newRoute.setAttribute("route-id", route.routeID.toLowerCase());
+        newRoute.setAttribute("route-name", route.name.toLowerCase());
         if(!route.active){
             newRoute.classList.add("inactive");
         }

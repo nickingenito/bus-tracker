@@ -36,3 +36,20 @@ function toggleInactive(){
         obj.style.display = obj.style.display === 'block' ? '' : 'block';
     });
 }
+
+function searchRoutes(){
+    let input = document.getElementById("route-search").value;
+    input = input.toLowerCase();
+    let cards = document.getElementsByClassName("route-card");
+
+    console.log(input);
+    for (i = 0; i < cards.length; i++){
+        const routeName = cards[i].getAttribute("route-name")
+        const routeID = cards[i].getAttribute("route-id")
+        if (!routeName.includes(input)){
+            cards[i].style.display="none";
+        } else {
+            cards[i].style.display="block";
+        }
+    }
+}
