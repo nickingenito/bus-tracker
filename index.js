@@ -15,13 +15,20 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
 
     for (const route of routes){
         const newRoute = document.createElement('button');
-        const newHeader = document.createElement('h3');
+        const newHeader = document.createElement('h2');
         const newID = document.createElement('p');
+        const nextStop = document.createElement('div');
+        const stopText = document.createElement('p');
 
         newHeader.textContent = route.name;
+        stopText.textContent = "Next Stop: ";
+        nextStop.classList.add("next-stop");
         newRoute.classList.add("route-card");
+        newID.classList.add("id");
         newRoute.setAttribute("route-id", route.routeID.toLowerCase());
         newRoute.setAttribute("route-name", route.name.toLowerCase());
+
+
         if(!route.active){
             newRoute.classList.add("inactive");
         }
@@ -36,6 +43,8 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
 
         newRoute.appendChild(newHeader);
         newRoute.appendChild(newID);
+        nextStop.appendChild(stopText);
+        newRoute.appendChild(nextStop);
         container.appendChild(newRoute);
     }
 }
