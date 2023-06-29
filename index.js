@@ -24,22 +24,23 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         const timeText = document.createElement('h2');
         const minutes = document.createElement('p');
 
-        textContainer.classList.add("text-container");
-        timeContainer.classList.add("time-container");
-
         newHeader.textContent = route.name;
         stopText.textContent = route.timepoints[0].name;
         timeText.textContent = "0";
         minutes.textContent = "minutes";
+        newID.textContent = route.routeID;
+
+        textContainer.classList.add("text-container");
+        timeContainer.classList.add("time-container");
         nextStop.classList.add("next-stop");
         newRoute.classList.add("route-card");
         newID.classList.add("id");
+
         newRoute.setAttribute("route-id", route.routeID.toLowerCase());
         newRoute.setAttribute("route-name", route.name.toLowerCase());
         if(!route.active){
             newRoute.classList.add("inactive");
         }
-        newID.textContent = route.routeID;
 
         // Add event handler to route-cards to display routes
         const eventHandler = function (){
@@ -50,7 +51,6 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
 
         timeContainer.appendChild(timeText);
         timeContainer.appendChild(minutes);
-
         textContainer.appendChild(newHeader);
         textContainer.appendChild(newID);
         nextStop.appendChild(stopText);
@@ -72,7 +72,6 @@ function initMap() {
         elementType: "labels",
         stylers: [{visibility: "off"} ]
     }];
-
     const mapOptions = {
         zoom: 15,
         center: { lat: 33.21128520875526, lng: -97.14619021951677 },
