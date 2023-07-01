@@ -45,7 +45,7 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         // Add event handler to route-cards to display routes
         const eventHandler = function (){
             calculateAndDisplayRoute(directionsService, directionsRenderer, route.origin, route.waypoints);
-            addMarkers(map, route.timepoints);
+            addTimepoint(map, route.timepoints);
         }
         newRoute.addEventListener("click", eventHandler);
 
@@ -67,15 +67,11 @@ function initMap() {
         suppressMarkers: true
     });
 
-    const myStyles = [{
-        featureType: "poi",
-        elementType: "labels",
-        stylers: [{visibility: "off"} ]
-    }];
     const mapOptions = {
         zoom: 15,
         center: { lat: 33.21128520875526, lng: -97.14619021951677 },
-        styles: myStyles,
+        //styles: myStyles,
+        mapId: 'e1219aea0f1d847a'
     };
 
     const map = new google.maps.Map(document.getElementById("map"), mapOptions);
@@ -110,41 +106,19 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
         .catch((e) => window.alert("Directions request failed"));
 }
 
-function setMapOnAll(map){
+async function addTimepoint(map, timepoints){
     for (let i = 0; i < markers.length; i++){
-        markers[i].setMap(map);
+        markers[i].position = null;
     }
-}
-
-function addMarkers(map, timepoints){
-    setMapOnAll(null);
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
     markers = [];
-    let counter = 1;
     for (const timepoint of timepoints){
-        const infoWindow = new google.maps.InfoWindow({
-            content: timepoint.name,
-        })
-        const marker = new google.maps.Marker({
-            position: timepoint.coordinates,
+        const marker = new AdvancedMarkerElement ({
             map,
-            label: {
-                text: counter.toString(),
-                fontFamily: "sans-serif",
-                color: "#ffffff",
-                fontSize: "18px",
-            },
-            title: timepoint.name,
-        });
-        marker.addListener("click", () => {
-            infoWindow.open({
-                anchor: marker,
-                map,
-            });
+            position: timepoint.coordinates,
         });
         markers.push(marker);
-        counter++;
     }
-    setMapOnAll(map)
 }
 
 window.initMap = initMap;
