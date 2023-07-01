@@ -45,7 +45,7 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         // Add event handler to route-cards to display routes
         const eventHandler = function (){
             calculateAndDisplayRoute(directionsService, directionsRenderer, route.origin, route.waypoints);
-            addMarkers(map, route.timepoints);
+            addMarkers(map, route.timepoints, route.stops);
         }
         newRoute.addEventListener("click", eventHandler);
 
@@ -118,7 +118,7 @@ function setMapOnAll(map){
 }
 
 
-function addMarkers(map, timepoints){
+function addMarkers(map, timepoints, stops){
     setMapOnAll(null);
     markers = [];
     let counter = 1;
@@ -127,10 +127,15 @@ function addMarkers(map, timepoints){
         scaledSize: new google.maps.Size(24,32),
         labelOrigin: new google.maps.Point(12, 12),
     }
+    const imageSmall = {
+        url: "./assets/marker.png",
+        scaledSize: new google.maps.Size(19.2,25.6),
+        labelOrigin: new google.maps.Point(10,10),
+    }
     for (const timepoint of timepoints){
         const infoWindow = new google.maps.InfoWindow({
             content: timepoint.name,
-        })
+        });
         const marker = new google.maps.Marker({
             position: timepoint.coordinates,
             map,
@@ -151,6 +156,30 @@ function addMarkers(map, timepoints){
         });
         markers.push(marker);
         counter++;
+    }
+    for (const stop of stops){
+        const infoWindow = new google.maps.InfoWindow({
+            content: stop.name,
+        });
+        const marker = new google.maps.Marker({
+            position: stop.coordinates,
+            map,
+            label: {
+                text: "\ue530",
+                fontFamily: "Material Icons",
+                color: "#ffffff",
+                fontSize: "15px",
+            },
+            icon: imageSmall,
+            title: stop.name,
+        });
+        marker.addListener("click", () => {
+            infoWindow.open({
+                anchor: marker,
+                map,
+            });
+        });
+        markers.push(marker);
     }
     setMapOnAll(map)
 }
