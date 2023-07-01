@@ -67,19 +67,16 @@ function initMap() {
         suppressMarkers: true
     });
 
-    /*
     const myStyles = [{
         featureType: "poi",
         elementType: "labels",
         stylers: [{visibility: "off"} ]
     }];
-    */
 
     const mapOptions = {
         zoom: 15,
         center: { lat: 33.21128520875526, lng: -97.14619021951677 },
-        //styles: myStyles,
-        mapId: 'e1219aea0f1d847a'
+        styles: myStyles,
     };
 
     const map = new google.maps.Map(document.getElementById("map"), mapOptions);
@@ -120,10 +117,16 @@ function setMapOnAll(map){
     }
 }
 
+
 function addMarkers(map, timepoints){
     setMapOnAll(null);
     markers = [];
     let counter = 1;
+    const image = {
+        url: "./assets/marker.png",
+        scaledSize: new google.maps.Size(24,32),
+        labelOrigin: new google.maps.Point(12, 12),
+    }
     for (const timepoint of timepoints){
         const infoWindow = new google.maps.InfoWindow({
             content: timepoint.name,
@@ -133,10 +136,11 @@ function addMarkers(map, timepoints){
             map,
             label: {
                 text: counter.toString(),
-                fontFamily: "sans-serif",
+                fontFamily: "",
                 color: "#ffffff",
                 fontSize: "18px",
             },
+            icon: image,
             title: timepoint.name,
         });
         marker.addListener("click", () => {
