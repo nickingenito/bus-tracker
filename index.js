@@ -62,7 +62,9 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
 }
 
 function initMap() {
-    const directionsService = new google.maps.DirectionsService();
+    const directionsService = new google.maps.DirectionsService({
+        avoidHighways: true
+    });
     const directionsRenderer = new google.maps.DirectionsRenderer({
         suppressMarkers: true
     });
