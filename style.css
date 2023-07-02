@@ -50,7 +50,7 @@ body {
     background-color: white;
     height: fit-content;
     display: grid;
-    grid-template-columns: 70% 30%;
+    grid-template-columns: 75% 25%;
     padding: 10px;
     border: none;
     text-align: left;
@@ -76,7 +76,13 @@ body {
 .time-container{
     display: flex;
     align-items: center;
+    margin: auto;
     flex-direction: column;
+    width: 100%;
+}
+
+.text-container{
+    width: 100%;
 }
 
 #route-list{

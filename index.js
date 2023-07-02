@@ -38,6 +38,7 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         newRoute.setAttribute("route-id", route.routeID.toLowerCase());
         newRoute.setAttribute("route-name", route.name.toLowerCase());
 
+        // Get current day and compare against route activity (getDay returns int)
         const d = new Date();
         let day = d.getDay();
         if(!route.active.enabled){
