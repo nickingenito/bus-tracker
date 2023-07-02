@@ -25,7 +25,6 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         const minutes = document.createElement('p');
 
         newHeader.textContent = route.name;
-        stopText.textContent = route.timepoints[0].name;
         timeText.textContent = "0";
         minutes.textContent = "minutes";
         newID.textContent = route.routeID;
@@ -38,8 +37,19 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
 
         newRoute.setAttribute("route-id", route.routeID.toLowerCase());
         newRoute.setAttribute("route-name", route.name.toLowerCase());
-        if(!route.active){
+
+        const d = new Date();
+        let day = d.getDay();
+        if(!route.active.enabled){
             newRoute.classList.add("inactive");
+            newID.style.backgroundColor = "#CC0000";
+            stopText.textContent = "Route is inactive for Summer 2023";
+        } else if (!route.active.days.includes(day)){
+            newRoute.classList.add("inactive");
+            stopText.textContent = route.timepoints[0].name;
+            newID.style.backgroundColor = "#FFAA00";
+        } else {
+            newID.style.backgroundColor = "#509E2F";
         }
 
         // Add event handler to route-cards to display routes
