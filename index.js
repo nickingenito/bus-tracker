@@ -14,6 +14,7 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
     const container = document.getElementById('route-list');
 
     for (const route of routes){
+        const content = document.createElement('div');
         const textContainer = document.createElement('div');
         const timeContainer = document.createElement('div');
         const newRoute = document.createElement('button');
@@ -25,12 +26,11 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         const minutes = document.createElement('p');
 
         newHeader.textContent = route.name;
-        timeText.textContent = "0";
-        minutes.textContent = "minutes";
         newID.textContent = route.routeID;
 
         textContainer.classList.add("text-container");
         timeContainer.classList.add("time-container");
+        content.classList.add("content");
         nextStop.classList.add("next-stop");
         newRoute.classList.add("route-card");
         newID.classList.add("route-id");
@@ -56,10 +56,14 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         } else if (time <= startTime || time >= endTime){ // Route is inactive at this time
             newRoute.classList.add("inactive");
             stopText.textContent = route.timepoints[0].name;
+            timeText.textContent = startTime;
+            minutes.textContent = "later today"
             newID.style.backgroundColor = "#FFAA00";
         } else { // Route is active
             newID.style.backgroundColor = "#509E2F";
             stopText.textContent = route.timepoints[0].name;
+            timeText.textContent = "0";
+            minutes.textContent = "minutes";
         }
 
         // Add event handler to route-cards to display routes
@@ -71,12 +75,13 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
 
         timeContainer.appendChild(timeText);
         timeContainer.appendChild(minutes);
-        textContainer.appendChild(newHeader);
+        newRoute.appendChild(newHeader);
         textContainer.appendChild(newID);
         nextStop.appendChild(stopText);
         textContainer.appendChild(nextStop);
-        newRoute.appendChild(textContainer);
-        newRoute.appendChild(timeContainer);
+        content.appendChild(textContainer);
+        content.appendChild(timeContainer);
+        newRoute.appendChild(content);
         container.appendChild(newRoute);
     }
 }
