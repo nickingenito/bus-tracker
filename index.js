@@ -1,5 +1,6 @@
 let markers = [];
 
+// Use Fetch API to load JSON file as objects for routes
 async function populate(map, directionsService, directionsRenderer) {
     const requestURL = "./routes.json";
     const request = new Request(requestURL);
@@ -10,6 +11,7 @@ async function populate(map, directionsService, directionsRenderer) {
     createRoutes(map, routes, directionsService, directionsRenderer);
 }
 
+//Access DOM and create route cards from JSON file
 function createRoutes(map, routes, directionsService, directionsRenderer){
     const container = document.getElementById('route-list');
 
@@ -86,6 +88,7 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
     }
 }
 
+// Initiate map and load Google Maps services
 function initMap() {
     const directionsService = new google.maps.DirectionsService({
         avoidHighways: true
@@ -113,6 +116,7 @@ function initMap() {
     populate(map, directionsService, directionsRenderer);
 }
 
+// Calculate and load roats based on route waypoints
 function calculateAndDisplayRoute(directionsService, directionsRenderer, origin, waypoints){
     // Format waypoints from JSON array
     const waypts = [];
@@ -144,7 +148,7 @@ function setMapOnAll(map){
     }
 }
 
-
+// Add markers to stops for timepoints and stops
 function addMarkers(map, timepoints, stops){
     setMapOnAll(null);
     markers = [];
