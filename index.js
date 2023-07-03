@@ -41,17 +41,25 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
 
         // Get current day and compare against route activity (getDay returns int)
         const d = new Date();
-        let day = d.getDay();
-        if(!route.active.enabled){
+        const day = d.getDay();
+        const time = d.toLocaleTimeString('en-US', {hour12: false, hour: '2-digit', minute: '2-digit'}).slice(0,-3);
+        const startTime = route.timepoints[0].times[0];
+        const endTime = route.timepoints[route.timepoints.length - 1].times.slice(-1).toString();
+        if(!route.active.enabled){ // Route is not enabled
             newRoute.classList.add("inactive");
             newID.style.backgroundColor = "#CC0000";
             stopText.textContent = "Route is inactive for Summer 2023";
-        } else if (!route.active.days.includes(day)){
+        } else if (!route.active.days.includes(day)){ // Route is inactive for today
             newRoute.classList.add("inactive");
             stopText.textContent = route.timepoints[0].name;
             newID.style.backgroundColor = "#FFAA00";
-        } else {
+        } else if (time <= startTime || time >= endTime){ // Route is inactive at this time
+            newRoute.classList.add("inactive");
+            stopText.textContent = route.timepoints[0].name;
+            newID.style.backgroundColor = "#FFAA00";
+        } else { // Route is active
             newID.style.backgroundColor = "#509E2F";
+            stopText.textContent = route.timepoints[0].name;
         }
 
         // Add event handler to route-cards to display routes
