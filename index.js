@@ -33,7 +33,8 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         timeContainer.classList.add("time-container");
         nextStop.classList.add("next-stop");
         newRoute.classList.add("route-card");
-        newID.classList.add("id");
+        newID.classList.add("route-id");
+        newHeader.classList.add("route-name")
 
         newRoute.setAttribute("route-id", route.routeID.toLowerCase());
         newRoute.setAttribute("route-name", route.name.toLowerCase());
@@ -196,6 +197,5 @@ function addMarkers(map, timepoints, stops){
     }
     setMapOnAll(map)
 }
-
 
 window.initMap = initMap;

@@ -12,27 +12,33 @@
 </head>
 <body>
     <div class="container">
-        <form class="search">
-            <input type="text" class="searchbar" id="origin" placeholder="Current Location">
-            <input type="text" class="searchbar" id="destination" placeholder="Enter an Address">
-        </form>
+        <div class="address-search single">
+            <div class="directions-graphic">
+                <span class="material-symbols-outlined scale-down">circle</span>
+                <span class="material-symbols-outlined">more_vert</span>
+                <span class="material-symbols-outlined scale-down">location_on</span>
+            </div>
+            <div class="searchbars">
+                <input type="text" class="searchbar" id="origin" value="Current Location">
+                <input type="text" class="searchbar" id="destination" placeholder="Enter a destination" onfocus="expandSearch()">
+            </div>
+        </div>
         <div id="map"></div>
     </div>
-    <div class="sidebar">
-        <button class="toggle" type="button">
-            <span class="material-symbols-outlined" id="handle">drag_handle</span>
-        </button>
-        <div class="cards">
+    <div class="sidebar short">
+        <div class="header">
+            <button class="toggle-sidebar" type="button" onclick="expandSidebar()">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
             <div class="branding">
-                <span class="material-symbols-outlined">directions_bus</span>
                 <h2>University Bus Tracker</h2>
             </div>
-            <div class="sidebar-search">
-                <input type="text" id="route-search" class="sidebar-searchbar" placeholder="Search by Route" onkeyup="searchRoutes()">
-            </div>
-            <button class="toggle-inactive" onclick="toggleInactive()">Toggle-Inactive</button>
-            <div id="route-list"></div>
         </div>
+        <div class="sub-header">
+            <input type="text" id="route-search" class="sidebar-search" placeholder="Search by Route" onkeyup="searchRoutes()">
+            <button class="toggle-inactive" onclick="toggleInactive()">Show Inactive Routes</button>
+        </div>
+        <div id="route-list"></div>
     </div>
     <script src="./script.js"></script>
     <script id="map-script"

@@ -49,9 +49,17 @@ function searchRoutes(){
         if (!routeName.includes(input)){
             cards[i].style.display="none";
         } else {
-            cards[i].style.display="block";
+            cards[i].style.display="grid";
         }
     }
+}
+
+function expandSidebar(){
+    document.querySelector(".sidebar").classList.toggle("short");
+}
+
+function expandSearch(){
+    document.querySelector(".address-search").classList.toggle("single");
 }
 
 function getCurrentLocation(){
@@ -66,3 +74,4 @@ function getCurrentLocation(){
         );
     }
 }
+
