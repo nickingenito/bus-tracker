@@ -14,31 +14,69 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
     const container = document.getElementById('route-list');
 
     for (const route of routes){
+        const textContainer = document.createElement('div');
+        const timeContainer = document.createElement('div');
         const newRoute = document.createElement('button');
-        const newHeader = document.createElement('h3');
+        const newHeader = document.createElement('h2');
         const newID = document.createElement('p');
+        const nextStop = document.createElement('div');
+        const stopText = document.createElement('p');
+        const timeText = document.createElement('h2');
+        const minutes = document.createElement('p');
 
         newHeader.textContent = route.name;
-        newRoute.classList.add("route-card");
-        if(!route.active){
-            newRoute.classList.add("inactive");
-        }
+        timeText.textContent = "0";
+        minutes.textContent = "minutes";
         newID.textContent = route.routeID;
 
+        textContainer.classList.add("text-container");
+        timeContainer.classList.add("time-container");
+        nextStop.classList.add("next-stop");
+        newRoute.classList.add("route-card");
+        newID.classList.add("route-id");
+        newHeader.classList.add("route-name")
+
+        newRoute.setAttribute("route-id", route.routeID.toLowerCase());
+        newRoute.setAttribute("route-name", route.name.toLowerCase());
+
+        // Get current day and compare against route activity (getDay returns int)
+        const d = new Date();
+        let day = d.getDay();
+        if(!route.active.enabled){
+            newRoute.classList.add("inactive");
+            newID.style.backgroundColor = "#CC0000";
+            stopText.textContent = "Route is inactive for Summer 2023";
+        } else if (!route.active.days.includes(day)){
+            newRoute.classList.add("inactive");
+            stopText.textContent = route.timepoints[0].name;
+            newID.style.backgroundColor = "#FFAA00";
+        } else {
+            newID.style.backgroundColor = "#509E2F";
+        }
+
+        // Add event handler to route-cards to display routes
         const eventHandler = function (){
             calculateAndDisplayRoute(directionsService, directionsRenderer, route.origin, route.waypoints);
-            addMarkers(map, route.timepoints);
+            addMarkers(map, route.timepoints, route.stops);
         }
         newRoute.addEventListener("click", eventHandler);
 
-        newRoute.appendChild(newHeader);
-        newRoute.appendChild(newID);
+        timeContainer.appendChild(timeText);
+        timeContainer.appendChild(minutes);
+        textContainer.appendChild(newHeader);
+        textContainer.appendChild(newID);
+        nextStop.appendChild(stopText);
+        textContainer.appendChild(nextStop);
+        newRoute.appendChild(textContainer);
+        newRoute.appendChild(timeContainer);
         container.appendChild(newRoute);
     }
 }
 
 function initMap() {
-    const directionsService = new google.maps.DirectionsService();
+    const directionsService = new google.maps.DirectionsService({
+        avoidHighways: true
+    });
     const directionsRenderer = new google.maps.DirectionsRenderer({
         suppressMarkers: true
     });
@@ -93,23 +131,35 @@ function setMapOnAll(map){
     }
 }
 
-function addMarkers(map, timepoints){
+
+function addMarkers(map, timepoints, stops){
     setMapOnAll(null);
     markers = [];
     let counter = 1;
+    const image = {
+        url: "./assets/marker.png",
+        scaledSize: new google.maps.Size(24,32),
+        labelOrigin: new google.maps.Point(12, 12),
+    }
+    const imageSmall = {
+        url: "./assets/marker.png",
+        scaledSize: new google.maps.Size(19.2,25.6),
+        labelOrigin: new google.maps.Point(10,10),
+    }
     for (const timepoint of timepoints){
         const infoWindow = new google.maps.InfoWindow({
             content: timepoint.name,
-        })
+        });
         const marker = new google.maps.Marker({
             position: timepoint.coordinates,
             map,
             label: {
                 text: counter.toString(),
-                fontFamily: "sans-serif",
+                fontFamily: "",
                 color: "#ffffff",
                 fontSize: "18px",
             },
+            icon: image,
             title: timepoint.name,
         });
         marker.addListener("click", () => {
@@ -120,6 +170,30 @@ function addMarkers(map, timepoints){
         });
         markers.push(marker);
         counter++;
+    }
+    for (const stop of stops){
+        const infoWindow = new google.maps.InfoWindow({
+            content: stop.name,
+        });
+        const marker = new google.maps.Marker({
+            position: stop.coordinates,
+            map,
+            label: {
+                text: "\ue530",
+                fontFamily: "Material Icons",
+                color: "#ffffff",
+                fontSize: "15px",
+            },
+            icon: imageSmall,
+            title: stop.name,
+        });
+        marker.addListener("click", () => {
+            infoWindow.open({
+                anchor: marker,
+                map,
+            });
+        });
+        markers.push(marker);
     }
     setMapOnAll(map)
 }

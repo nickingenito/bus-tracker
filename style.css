@@ -7,9 +7,9 @@
 }
 
 body {
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 80% 20%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
     background-color: #f1f1f1;
 }
 
@@ -22,96 +22,187 @@ body {
 
 .sidebar{
     height: 100vh;
-    width: 100%;
-}
-
-.search{
-    width: 100%;
-    height: 120px;
-    background-color: white;
+    width: 25%;
+    background-color: #f1f1f1;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    transition: width .10s ease-in-out;
+    padding: 0 1rem;
+}
+
+.address-search{
+    width: 30%;
+    height: auto;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    padding: .5rem;
+    border-radius: 10px;
+    top: 5px;
+    left: 5px;
+    z-index: 5;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.directions-graphic{
+    width: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchbars{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 4px;
 }
 
 #map{
     width: 100%;
     height: 100%;
+    position: relative;
 }
 
 .searchbar{
-    width: 100%;
-    height: 100%;
-    border: none;
+    width: auto;
+    height: 40px;
     padding: 10px;
+    border: 1px solid grey;
+    border-radius: 8px;
+}
+
+.single #origin{
+    display: none;
+}
+
+.single .directions-graphic{
+    display: none;
+}
+
+.single #destination{
+    border: none;
+}
+
+.header{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    margin: 20px 0;
+}
+
+.toggle-sidebar{
+    margin: auto;
+    border: none;
 }
 
 .route-card{
-    width: 90%;
+    width: 100%;
     background-color: white;
-    height: 70px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 6px;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: 75% 25%;
     padding: 10px;
-    border-radius: 5px;
+    border: none;
+    text-align: left;
+    box-shadow: 0px 0px 3px 0px #111;
+    border-radius: 2px;
+}
+
+.route-card:focus{
+    border-left: solid 5px #00853E;
+    border-radius: 2px;
+}
+
+.route-id{
+    color: white;
+    border-radius: 2px;
+    padding: 3px;
+    width: fit-content;
+    font-size: 10px;
+    margin-top: 2px;
+    margin-bottom: 4px;
+}
+
+.time-container{
+    display: flex;
+    align-items: center;
+    margin: auto;
+    flex-direction: column;
+    width: 100%;
+}
+
+.text-container{
+    width: 100%;
 }
 
 #route-list{
     overflow: auto;
     height: 100vh;
     width: 100%;
-}
-
-#handle{
-    transform: rotate(90deg);
-}
-
-.toggle{
-    border: none;
-    width: 20px;
-}
-
-.sidebar{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: center;
-}
-
-.cards{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding-right: 10px;
-    align-items: center;
+    margin-top: 6px;
 }
 
 .branding{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-    column-gap: 10px;
-    margin-top: 20px;
+    margin: auto;
 }
 
 .sidebar-search{
-    width: 100%;
     margin-bottom: 10px;
-}
-
-.sidebar-searchbar{
     width: 100%;
     height: 30px;
     border-radius: 5px;
     padding: 10px;
+    border: none;
 }
 
 .inactive{
     display: none;
 }
 
+.toggle-inactive{
+    background-color: #00853E;
+    color: white;
+    border: none;
+    height: 30px;
+    border-radius: 2px;
+    width: 100%;
+}
+
+.short{
+    width: 5%;
+}
+
+.short .toggle-inactive{
+    display: none;
+}
+
+.short .sidebar-search{
+    display: none;
+}
+
+.short .branding{
+    display: none;
+}
+
+.short .route-card .next-stop {
+    display: none;
+}
+
+.short .route-card .route-name {
+    display: none;
+}
+
+.short .route-card .time-container {
+    display: none;
+}
+
+.short .route-card .route-id{
+    width: 100;
+    margin: 0;
+}
 
 
