@@ -94,7 +94,12 @@ function initMap() {
         avoidHighways: true
     });
     const directionsRenderer = new google.maps.DirectionsRenderer({
-        suppressMarkers: true
+        suppressMarkers: true,
+        polylineOptions: {
+            strokeColor: "#008000",
+            strokeOpacity: .6,
+            strokeWeight: 6
+        }
     });
 
     const myStyles = [{
