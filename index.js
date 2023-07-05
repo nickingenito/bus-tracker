@@ -1,4 +1,5 @@
 let markers = [];
+let geocoder;
 
 // Use Fetch API to load JSON file as objects for routes
 async function populate(map, directionsService, directionsRenderer) {
@@ -101,6 +102,7 @@ function initMap() {
             strokeWeight: 6
         }
     });
+    geocoder = new google.maps.Geocoder();
 
     const myStyles = [{
         featureType: "poi",
@@ -218,6 +220,30 @@ function addMarkers(map, timepoints, stops){
         markers.push(marker);
     }
     setMapOnAll(map)
+}
+
+function getDestination(){
+    const input = document.getElementById("destination").value;
+    geocode(input);
+    console.log(response);
+}
+
+function geocode(input){
+    geocoder
+        .geocode({
+            address: input,
+            componentRestrictions: {
+                country: "US",
+                administrativeArea: "Denton County",
+            },
+        })
+        .then(result => {
+            const { results } = result;
+            response = results[0].geometry.location;
+        })
+        .catch((e) => {
+            alert("Geocode failed: " + e);
+        });
 }
 
 window.initMap = initMap;

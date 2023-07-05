@@ -1,3 +1,5 @@
+let currentLocation;
+
 class Node {
     constructor(val) {
         this.value = val;
@@ -29,7 +31,6 @@ class LinkedList {
     }
 }
 
-
 function toggleInactive(){
     const inactives = document.querySelectorAll(".inactive")
     inactives.forEach((obj) => {
@@ -60,13 +61,14 @@ function expandSidebar(){
 
 function expandSearch(){
     document.querySelector(".address-search").classList.toggle("single");
+    console.log(currentLocation);
 }
 
 function getCurrentLocation(){
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             (position) => {
-                const pos = {
+                currentLocation = {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude,
                 };
@@ -74,4 +76,6 @@ function getCurrentLocation(){
         );
     }
 }
+
+getCurrentLocation();
 

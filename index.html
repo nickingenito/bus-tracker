@@ -19,8 +19,18 @@
                 <span class="material-symbols-outlined scale-down">location_on</span>
             </div>
             <div class="searchbars">
-                <input type="text" class="searchbar" id="origin" value="Current Location">
-                <input type="text" class="searchbar" id="destination" placeholder="Enter a destination" onfocus="expandSearch()">
+                <div class="searchbox" id="origin-search">
+                    <input type="text" class="searchbar" id="origin" value="Current Location">
+                    <button class="search-button">
+                        <span class="material-symbols-outlined">search</span>
+                    </button>
+                </div>
+                <div class="searchbox" id="destination-search" onclick="getDestination()">
+                    <input type="text" class="searchbar" id="destination" placeholder="Enter a destination" onfocus="expandSearch()">
+                    <button class="search-button">
+                        <span class="material-symbols-outlined">search</span>
+                    </button>
+                </div>
             </div>
         </div>
         <div id="map"></div>
