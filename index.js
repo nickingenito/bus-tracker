@@ -238,7 +238,7 @@ function geocode(input){
         }
     }, function (results, status) {
         if (status == 'OK') {
-            response = results[0].geometry.location;
+            response = { "lat" : results[0].geometry.location.lat(), "lng" : results[0].geometry.location.lng() };
         } else {
             alert ("Geocode Failed: " + status);
         }
