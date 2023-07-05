@@ -64,7 +64,7 @@ function expandSearch(){
     console.log(currentLocation);
 }
 
-function getCurrentLocation(){
+async function getCurrentLocation(){
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             (position) => {
@@ -77,10 +77,6 @@ function getCurrentLocation(){
     }
 }
 
-<<<<<<< HEAD
-getCurrentLocation();
-
-=======
 function calculateDistance(lat1, lon1, lat2, lon2) {
     const r = 6371;
     const p = Math.PI / 180;
@@ -88,5 +84,6 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
     
     return 2 * r * Math.asin(Math.sqrt(a));
 }
+
+getCurrentLocation();
     
->>>>>>> 11b223d8eaa7f25a04a0574c9be89f78ca4b251f
