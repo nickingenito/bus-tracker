@@ -103,13 +103,22 @@ function initMap() {
             strokeWeight: 6
         }
     });
+    const input = document.getElementById("destination");
+
+    const searchOptions = {
+        componentRestrictions: { country: "us" },
+    };
+
+    const searchBox = new google.maps.places.SearchBox(input, searchOptions);
+    /*
     geocoder = new google.maps.Geocoder();
-    const getCurrent = function() {
+    const getCurrent = async function() {
         const input = document.getElementById("destination").value;
-        geocode(input);
+        await geocode(input);
         console.log(response);
     }
     document.getElementById("destination-button").addEventListener("click", getCurrent);
+    */
 
     const myStyles = [{
         featureType: "poi",
