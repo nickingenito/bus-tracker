@@ -53,6 +53,7 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         const time = d.toLocaleTimeString('en-US', {hour12: false, hour: '2-digit', minute: '2-digit'});
         const startTime = route.timepoints[0].times[0];
         const endTime = route.timepoints[route.timepoints.length - 1].times.slice(-1).toString();
+        let nextStop
         if(!route.active.enabled){ // Route is not enabled
             newRoute.classList.add("inactive");
             newID.style.backgroundColor = "#CC0000";
@@ -77,14 +78,13 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
                     if (route.timepoints[i].times[j] >= time){
                         if (route.timepoints[i].times[j] <= nextTime){
                             nextTime = route.timepoints[i].times[j];
-                            stopText.textContent = route.timepoints[i].name;
+                            nextStop = route.timepoints[i].name;
                         }
                     }
                 }
             }
+            stopText.textContent = nextStop;
             timeText.textContent = nextTime.slice(3,5) - time.slice(3,5);
-            console.log("Current Time: " + time);
-            console.log("Next Time for route: " + route.name + " is: " + nextTime);
         }
 
         // Add event handler to route-cards to display routes
@@ -108,7 +108,6 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         if(route.active.enabled){ // Create route timepoint list on focus
             const timepointList = document.createElement('div');
             timepointList.classList.add("timepoint-list");
-            const last = route.timepoints[route.timepoints.length - 1].name;
             let counter = 0;
             for (const timepoint of route.timepoints){
                 const timepointContainer = document.createElement('div');
@@ -123,14 +122,13 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
 
                 timepointContainer.appendChild(number);
                 timepointContainer.appendChild(routeTimepoint);
-                timepointList.appendChild(timepointContainer)
 
-                if (timepoint.name != last){
-                    const divider = document.createElement('span');
-                    divider.classList.add('material-symbols-outlined')
-                    divider.textContent = "more_vert"
-                    timepointList.appendChild(divider);
-                }
+                const divider = document.createElement('span');
+                divider.classList.add('material-symbols-outlined')
+                divider.textContent = "more_vert"
+                timepointList.appendChild(divider);
+
+                timepointList.appendChild(timepointContainer)
                 counter++;
             }
             newRoute.appendChild(timepointList);
