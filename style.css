@@ -36,6 +36,7 @@ body {
     padding: 0 1rem;
 }
 
+
 .address-search{
     width: 30%;
     height: auto;
@@ -107,15 +108,17 @@ body {
 }
 
 .header{
-    display: flex;
     width: 100%;
-    flex-direction: row;
     margin: 20px 0;
+    justify-items: start;
+    
 }
 
-.toggle-sidebar{
-    margin: auto;
+.toggle-sidebar{ 
     border: none;
+    background: none;
+    width: auto;
+    justify-self: start;
 }
 
 .route-card{
@@ -157,7 +160,7 @@ body {
 }
 
 .timepoint-num{
-    border: 1px solid black;
+    border: 1px solid white;
     border-radius: 50%;
     width: 15px;
     height: 15px;
@@ -199,10 +202,6 @@ body {
     margin-top: 6px;
 }
 
-.branding{
-    margin: auto;
-}
-
 .sidebar-search{
     margin-bottom: 10px;
     width: 100%;
@@ -223,39 +222,6 @@ body {
     height: 30px;
     border-radius: 2px;
     width: 100%;
-}
-
-.short{
-    width: 5%;
-}
-
-.short .toggle-inactive{
-    display: none;
-}
-
-.short .sidebar-search{
-    display: none;
-}
-
-.short .branding{
-    display: none;
-}
-
-.short .route-card .next-stop {
-    display: none;
-}
-
-.short .route-card .route-name {
-    display: none;
-}
-
-.short .route-card .time-container {
-    display: none;
-}
-
-.short .route-card .route-id{
-    width: 100;
-    margin: 0;
 }
 
 

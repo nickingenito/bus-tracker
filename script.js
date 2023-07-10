@@ -55,10 +55,6 @@ function searchRoutes(){
     }
 }
 
-function expandSidebar(){
-    document.querySelector(".sidebar").classList.toggle("short");
-}
-
 function expandSearch(){
     document.querySelector(".address-search").classList.toggle("single");
     console.log(currentLocation);
