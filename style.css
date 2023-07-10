@@ -28,7 +28,7 @@ body {
 .sidebar{
     height: 100vh;
     width: 25%;
-    background-color: #141414;
+    background-color: #262626;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -40,7 +40,7 @@ body {
 .address-search{
     width: 30%;
     height: auto;
-    background-color: #121212;
+    background-color: #262626;
     display: flex;
     flex-direction: row;
     position: absolute;
@@ -71,14 +71,14 @@ body {
     width: 100%;
     display: flex;
     align-items: center;
-    border: 1px solid grey;
+    border: 1px solid white;
     border-radius: 8px;
     padding: 6px;
 }
 
 .search-button {
     border: none;
-    background-color: white;
+    background-color:  #262626;;
 }
 
 #map{
@@ -93,6 +93,7 @@ body {
     padding: 10px;
     border: none;
     outline: none;
+    background-color: #262626;
 }
 
 .single #origin-search{
@@ -123,7 +124,7 @@ body {
 
 .route-card{
     width: 100%;
-    background-color: #262626;
+    background-color: #333333;
     height: fit-content;
     padding: 10px;
     border: none;
