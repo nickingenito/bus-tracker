@@ -27,7 +27,7 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         const newRoute = document.createElement('button');
         const newHeader = document.createElement('h2');
         const newID = document.createElement('p');
-        const nextStop = document.createElement('div');
+        const nextStopText = document.createElement('div');
         const stopText = document.createElement('p');
         const timeText = document.createElement('h2');
         const minutes = document.createElement('p');
@@ -38,7 +38,7 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         textContainer.classList.add("text-container");
         timeContainer.classList.add("time-container");
         content.classList.add("content");
-        nextStop.classList.add("next-stop");
+        nextStopText.classList.add("next-stop");
         newRoute.classList.add("route-card");
         newRoute.classList.add("condensed");
         newID.classList.add("route-id");
@@ -50,7 +50,7 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         // Get current day and compare against route activity (getDay returns int)
         const d = new Date();
         const day = d.getDay();
-        const time = d.toLocaleTimeString('en-US', {hour12: false, hour: '2-digit', minute: '2-digit'}).slice(0,-3);
+        const time = d.toLocaleTimeString('en-US', {hour12: false, hour: '2-digit', minute: '2-digit'});
         const startTime = route.timepoints[0].times[0];
         const endTime = route.timepoints[route.timepoints.length - 1].times.slice(-1).toString();
         if(!route.active.enabled){ // Route is not enabled
@@ -69,9 +69,22 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
             newID.style.backgroundColor = "#FFAA00";
         } else { // Route is active
             newID.style.backgroundColor = "#509E2F";
-            stopText.textContent = route.timepoints[0].name;
-            timeText.textContent = "0";
             minutes.textContent = "minutes";
+            
+            let nextTime = endTime;
+            for (let i = 0; i < route.timepoints.length; i++){
+                for (let j = 0; j < route.timepoints[i].times.length; j++){
+                    if (route.timepoints[i].times[j] >= time){
+                        if (route.timepoints[i].times[j] <= nextTime){
+                            nextTime = route.timepoints[i].times[j];
+                            stopText.textContent = route.timepoints[i].name;
+                        }
+                    }
+                }
+            }
+            timeText.textContent = nextTime.slice(3,5) - time.slice(3,5);
+            console.log("Current Time: " + time);
+            console.log("Next Time for route: " + route.name + " is: " + nextTime);
         }
 
         // Add event handler to route-cards to display routes
@@ -86,8 +99,8 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         timeContainer.appendChild(minutes);
         newRoute.appendChild(newHeader);
         textContainer.appendChild(newID);
-        nextStop.appendChild(stopText);
-        textContainer.appendChild(nextStop);
+        nextStopText.appendChild(stopText);
+        textContainer.appendChild(nextStopText);
         content.appendChild(textContainer);
         content.appendChild(timeContainer);
         newRoute.appendChild(content);
@@ -303,4 +316,3 @@ function geocode(input){
 }
 
 window.initMap = initMap;
-console.log(stopList);
