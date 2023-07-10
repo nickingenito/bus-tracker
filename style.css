@@ -220,7 +220,7 @@ body {
     display: none;
 }
 
-.toggle-inactive{
+#toggle-inactive{
     background-color: #00853E;
     color: white;
     border: none;

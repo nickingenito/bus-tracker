@@ -32,10 +32,17 @@ class LinkedList {
 }
 
 function toggleInactive(){
+    const button = document.getElementById("toggle-inactive")
     const inactives = document.querySelectorAll(".inactive")
     inactives.forEach((obj) => {
         obj.style.display = obj.style.display === 'grid' ? '' : 'grid';
     });
+    if (button.classList.contains("show-inactive")){
+        button.textContent = "Show Inactive Routes";
+    } else {
+        button.textContent = "Hide Inactive Routes";
+    }
+    button.classList.toggle("show-inactive");
 }
 
 function searchRoutes(){
