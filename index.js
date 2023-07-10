@@ -1,6 +1,7 @@
 let markers = [];
 let geocoder;
 let response;
+let stopList = [];
 
 // Use Fetch API to load JSON file as objects for routes
 async function populate(map, directionsService, directionsRenderer) {
@@ -8,6 +9,8 @@ async function populate(map, directionsService, directionsRenderer) {
     const request = new Request(requestURL);
     const response = await fetch(request);
     const routes = await response.json();
+
+    stopList.push(routes);
 
     // Dynamically create route cards from JSON
     createRoutes(map, routes, directionsService, directionsRenderer);
@@ -37,6 +40,7 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         content.classList.add("content");
         nextStop.classList.add("next-stop");
         newRoute.classList.add("route-card");
+        newRoute.classList.add("condensed");
         newID.classList.add("route-id");
         newHeader.classList.add("route-name")
 
@@ -74,6 +78,7 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         const eventHandler = function (){
             calculateAndDisplayRoute(directionsService, directionsRenderer, route.origin, route.waypoints);
             addMarkers(map, route.timepoints, route.stops);
+            expandCard(route.routeID.toLowerCase());
         }
         newRoute.addEventListener("click", eventHandler);
 
@@ -86,6 +91,38 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         content.appendChild(textContainer);
         content.appendChild(timeContainer);
         newRoute.appendChild(content);
+
+        if(route.active.enabled){ // Create route timepoint list on focus
+            const timepointList = document.createElement('div');
+            timepointList.classList.add("timepoint-list");
+            const last = route.timepoints[route.timepoints.length - 1].name;
+            let counter = 0;
+            for (const timepoint of route.timepoints){
+                const timepointContainer = document.createElement('div');
+                timepointContainer.classList.add("timepoint-container");
+
+                const routeTimepoint = document.createElement('p');
+                routeTimepoint.textContent = timepoint.name;
+
+                const number = document.createElement('p');
+                number.classList.add('timepoint-num');
+                number.textContent = counter;
+
+                timepointContainer.appendChild(number);
+                timepointContainer.appendChild(routeTimepoint);
+                timepointList.appendChild(timepointContainer)
+
+                if (timepoint.name != last){
+                    const divider = document.createElement('span');
+                    divider.classList.add('material-symbols-outlined')
+                    divider.textContent = "more_vert"
+                    timepointList.appendChild(divider);
+                }
+                counter++;
+            }
+            newRoute.appendChild(timepointList);
+        }
+
         container.appendChild(newRoute);
     }
 }
@@ -238,6 +275,17 @@ function addMarkers(map, timepoints, stops){
     setMapOnAll(map)
 }
 
+function expandCard(routeID){
+    const cards = document.querySelectorAll(".route-card");
+    for (let i = 0; i < cards.length; i++){
+        if (cards[i].classList.contains("selected")){
+            cards[i].classList.remove("selected");
+        }
+    }
+    const search = '[route-id="' + routeID + '"]';
+    document.querySelector(search).classList.add("selected");
+}
+
 function geocode(input){
     geocoder.geocode({
         address: input,
@@ -255,3 +303,4 @@ function geocode(input){
 }
 
 window.initMap = initMap;
+console.log(stopList);

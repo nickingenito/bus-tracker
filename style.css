@@ -4,6 +4,7 @@
     box-sizing: border-box;
     font-family: 'Inter', sans-serif;
     font-family: 'Poppins', sans-serif;
+    color: white;
 }
 
 button{
@@ -27,7 +28,7 @@ body {
 .sidebar{
     height: 100vh;
     width: 25%;
-    background-color: #f1f1f1;
+    background-color: #141414;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -38,7 +39,7 @@ body {
 .address-search{
     width: 30%;
     height: auto;
-    background-color: white;
+    background-color: #121212;
     display: flex;
     flex-direction: row;
     position: absolute;
@@ -119,7 +120,7 @@ body {
 
 .route-card{
     width: 100%;
-    background-color: white;
+    background-color: #262626;
     height: fit-content;
     padding: 10px;
     border: none;
@@ -128,7 +129,38 @@ body {
     display: flex;
     flex-direction: column;
     text-align: left;
-    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.selected {
+    border-left: solid 5px #00853E;
+    border-radius: 2px;
+}
+
+.selected .timepoint-list{
+    display: block;
+}
+
+.timepoint-list{
+    display: none;
+    width: 100%;
+    border-top: 1px solid black;
+    margin-top: 4px;
+    padding: 10px 0 0 0;
+}
+
+.timepoint-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+}
+
+.timepoint-num{
+    border: 1px solid black;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
 }
 
 .content{
@@ -136,11 +168,6 @@ body {
     display: grid;
     grid-template-columns: 75% 25%;
     text-align: left;
-}
-
-.route-card:focus{
-    border-left: solid 5px #00853E;
-    border-radius: 2px;
 }
 
 .route-id{
