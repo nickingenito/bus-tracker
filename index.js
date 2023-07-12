@@ -1,5 +1,6 @@
 let markers = [];
 let stopList = [];
+let goodRoutes = [];
 let destination;
 
 // Use Fetch API to load JSON file as objects for routes
@@ -173,7 +174,7 @@ function initMap() {
         places.forEach((place) => {
             destination = { "lat": place.geometry.location.lat(), "lng": place.geometry.location.lng() }
         })
-        findClosest();
+        findClosest({ "lat" : 33.21128520875526, "lng" : -97.14619021951677 });
     })
 
     const myStyles = [{
@@ -305,14 +306,106 @@ function expandCard(routeID){
     document.querySelector(search).classList.add("selected");
 }
 
-function findClosest(){
+function findClosest(origin){
     let distance;
+    goodRoutes = [];
+    const recList = document.getElementById("rec-list");
+    while(recList.firstChild){
+        recList.removeChild(recList.firstChild);
+    }
     for (const route of stopList){
+        let minDistance = 1.0;
+        let minStop;
         for (const timepoint of route.timepoints){
             distance = calculateDistance(timepoint.coordinates, destination)
-            if (distance <= 1.0 ){
-                console.log("Match: " + route.name + ": " + timepoint.name + ": " + distance);
+            if (distance < minDistance ){
+                minDistance = distance
+                minStop = timepoint.name;
             }
+        }
+        for (const stop of route.stops){
+            distance = calculateDistance(stop.coordinates, destination)
+            if (distance < minDistance ){
+                minDistance = distance
+                minStop = stop.name;
+            }
+        }
+        if (minDistance < 1.0){
+            const bestStop = {
+                "name" : route.name,
+                "id" : route.routeID,
+                "originStop" : '',
+                "destinationStop" : minStop,
+                "distance" : minDistance
+            }
+            goodRoutes.push(bestStop);
+        }
+    }
+    for (let i = 0; i < goodRoutes.length; i++){
+        for (const route of stopList){
+            if(route.routeID == goodRoutes[i].id){
+                let minDistance = 1.0;
+                let minStop;
+                for (const timepoint of route.timepoints){
+                    distance = calculateDistance(timepoint.coordinates, origin)
+                    if (distance < minDistance ){
+                        minDistance = distance
+                        minStop = timepoint.name;
+                    }
+                }
+                for (const stop of route.stops){
+                    distance = calculateDistance(stop.coordinates, origin)
+                    if (distance < minDistance ){
+                        minDistance = distance
+                        minStop = stop.name;
+                    }
+                }
+                if (minDistance == 1.0){
+                    goodRoutes.splice(i,1);
+                } else {
+                    goodRoutes[i].originStop = minStop;
+                    goodRoutes[i].distance += minDistance;
+                }
+            }
+        }
+    }
+    if (goodRoutes.length == 0){
+        const searchError = document.createElement('p');
+        searchError.textContent = "Unable to find a route with those search parameters."
+        recList.appendChild(searchError);
+    } else {
+        console.log(goodRoutes);
+        for (const route of goodRoutes){
+            const recCard = document.createElement('div');
+            const recHeader = document.createElement('div');
+            const via = document.createElement('p');
+            const name = document.createElement('h3');
+            const id = document.createElement('p');
+            const origin = document.createElement('p');
+            const destination = document.createElement('p');
+    
+            via.textContent = "via";
+            name.textContent = route.name;
+            id.textContent = route.id;
+            origin.textContent = route.originStop;
+            destination.textContent = route.destinationStop;
+            recCard.classList.add("route-rec-card");
+            recHeader.classList.add("rec-header");
+            id.classList.add("route-idd");
+            id.style.backgroundColor = "#FFAA00";
+
+            const divider = document.createElement('span');
+            divider.classList.add('material-symbols-outlined')
+            divider.textContent = "more_vert"
+    
+            recHeader.appendChild(via);
+            recHeader.appendChild(name);
+            recHeader.appendChild(id);
+            recCard.appendChild(recHeader);
+            recCard.appendChild(origin);
+            recCard.appendChild(divider);
+            recCard.appendChild(destination);
+            recList.appendChild(recCard);
         }
     }
 }

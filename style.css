@@ -7,6 +7,10 @@
     color: white;
 }
 
+p{
+    font-size: 12px;
+}
+
 button{
     cursor: pointer;
 }
@@ -93,7 +97,7 @@ body {
     position: relative;
 }
 
-.route-rec{
+#rec-list{
     width: 100%;
     height: auto;
     background-color: #262626;
@@ -116,6 +120,7 @@ body {
     display: grid;
     grid-template-columns: 8% 76% 16%;
     align-items: center;
+    margin-bottom: 4px;
 }
 
 .hidden {
