@@ -326,7 +326,7 @@ setInterval(function() {
     let nextStop;
     let nextStopIndex;
 
-    console.log("Running");
+    console.log("Running interval update");
     for (const route of stopList){
         const startTime = route.timepoints[0].times[0];
         const endTime = route.timepoints[route.timepoints.length - 1].times.slice(-1).toString();
