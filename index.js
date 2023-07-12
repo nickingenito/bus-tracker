@@ -1,7 +1,6 @@
 let markers = [];
-let geocoder;
-let response;
 let stopList = [];
+let destination;
 
 // Use Fetch API to load JSON file as objects for routes
 async function populate(map, directionsService, directionsRenderer) {
@@ -164,15 +163,17 @@ function initMap() {
     };
 
     const searchBox = new google.maps.places.SearchBox(input, searchOptions);
-    /*
-    geocoder = new google.maps.Geocoder();
-    const getCurrent = async function() {
-        const input = document.getElementById("destination").value;
-        await geocode(input);
-        console.log(response);
-    }
-    document.getElementById("destination-button").addEventListener("click", getCurrent);
-    */
+    searchBox.addListener("places_changed", () => {
+        const places = searchBox.getPlaces();
+
+        if (places.length == 0){
+            return;
+        }
+
+        places.forEach((place) => {
+            destination = { "lat": place.geometry.location.lat(), "lng": place.geometry.location.lng() }
+        })
+    })
 
     const myStyles = [{
         featureType: "poi",
@@ -301,22 +302,6 @@ function expandCard(routeID){
     }
     const search = '[route-id="' + routeID + '"]';
     document.querySelector(search).classList.add("selected");
-}
-
-function geocode(input){
-    geocoder.geocode({
-        address: input,
-        componentRestrictions: {
-            country: "US",
-            administrativeArea: "Denton County",
-        }
-    }, function (results, status) {
-        if (status == 'OK') {
-            response = { "lat" : results[0].geometry.location.lat(), "lng" : results[0].geometry.location.lng() };
-        } else {
-            alert ("Geocode Failed: " + status);
-        }
-    });
 }
 
 setInterval(function() {

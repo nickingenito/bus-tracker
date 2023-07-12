@@ -36,7 +36,6 @@ body {
     padding: 0 1rem;
 }
 
-
 .address-search{
     width: 30%;
     height: auto;
@@ -233,6 +232,14 @@ body {
     height: 30px;
     border-radius: 2px;
     width: 100%;
+}
+
+.pac-container{
+    background-color: #333333;
+}
+
+.pac-item-query{
+    color: white;
 }
 
 

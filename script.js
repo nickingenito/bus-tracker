@@ -1,5 +1,6 @@
 let currentLocation;
 
+/*
 class Node {
     constructor(val) {
         this.value = val;
@@ -30,6 +31,7 @@ class LinkedList {
         this.tail = temp;
     }
 }
+*/
 
 function toggleInactive(){
     const button = document.getElementById("toggle-inactive")
@@ -53,7 +55,7 @@ function searchRoutes(){
     console.log(input);
     for (i = 0; i < cards.length; i++){
         const routeName = cards[i].getAttribute("route-name")
-        const routeID = cards[i].getAttribute("route-id")
+        //const routeID = cards[i].getAttribute("route-id")
         if (!routeName.includes(input)){
             cards[i].style.display="none";
         } else {
