@@ -99,7 +99,7 @@ body {
 
 #rec-list{
     width: 100%;
-    height: auto;
+    max-height: 50vh;
     background-color: #262626;
     padding: .5rem;
     border-radius: 10px;
@@ -107,6 +107,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    overflow: auto;
 }
 
 .route-rec-card{
@@ -284,6 +285,10 @@ body {
 
 .pac-item-query{
     color: white;
+}
+
+.pac-item:hover{
+    background-color: black;
 }
 
 
