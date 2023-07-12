@@ -199,6 +199,12 @@ body {
     width: 100%;
 }
 
+.next-stop{
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+}
+
 #route-list{
     overflow: auto;
     height: 100vh;

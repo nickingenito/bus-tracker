@@ -10,8 +10,6 @@ async function populate(map, directionsService, directionsRenderer) {
     const response = await fetch(request);
     const routes = await response.json();
 
-    stopList.push(routes);
-
     // Dynamically create route cards from JSON
     createRoutes(map, routes, directionsService, directionsRenderer);
 }
@@ -29,6 +27,7 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         const newID = document.createElement('p');
         const nextStopText = document.createElement('div');
         const stopText = document.createElement('p');
+        const indexText = document.createElement('p');
         const timeText = document.createElement('h2');
         const minutes = document.createElement('p');
 
@@ -43,6 +42,10 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         newRoute.classList.add("condensed");
         newID.classList.add("route-id");
         newHeader.classList.add("route-name")
+        stopText.classList.add("next-stop-name");
+        minutes.classList.add("time-label");
+        timeText.classList.add("time-left");
+        indexText.classList.add("route-index");
 
         newRoute.setAttribute("route-id", route.routeID.toLowerCase());
         newRoute.setAttribute("route-name", route.name.toLowerCase());
@@ -53,7 +56,8 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         const time = d.toLocaleTimeString('en-US', {hour12: false, hour: '2-digit', minute: '2-digit'});
         const startTime = route.timepoints[0].times[0];
         const endTime = route.timepoints[route.timepoints.length - 1].times.slice(-1).toString();
-        let nextStop
+        let nextStop;
+        let nextStopIndex;
         if(!route.active.enabled){ // Route is not enabled
             newRoute.classList.add("inactive");
             newID.style.backgroundColor = "#CC0000";
@@ -79,12 +83,14 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
                         if (route.timepoints[i].times[j] <= nextTime){
                             nextTime = route.timepoints[i].times[j];
                             nextStop = route.timepoints[i].name;
+                            nextStopIndex = i + 1;
                         }
                     }
                 }
             }
             stopText.textContent = nextStop;
             timeText.textContent = nextTime.slice(3,5) - time.slice(3,5);
+            indexText.textContent = nextStopIndex;
         }
 
         // Add event handler to route-cards to display routes
@@ -99,6 +105,7 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         timeContainer.appendChild(minutes);
         newRoute.appendChild(newHeader);
         textContainer.appendChild(newID);
+        nextStopText.appendChild(indexText);
         nextStopText.appendChild(stopText);
         textContainer.appendChild(nextStopText);
         content.appendChild(textContainer);
@@ -106,19 +113,19 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         newRoute.appendChild(content);
 
         if(route.active.enabled){ // Create route timepoint list on focus
+            stopList.push(route);
             const timepointList = document.createElement('div');
             timepointList.classList.add("timepoint-list");
-            let counter = 0;
-            for (const timepoint of route.timepoints){
+            for (let i = nextStopIndex; i < route.timepoints.length; i++){
                 const timepointContainer = document.createElement('div');
                 timepointContainer.classList.add("timepoint-container");
 
                 const routeTimepoint = document.createElement('p');
-                routeTimepoint.textContent = timepoint.name;
+                routeTimepoint.textContent = route.timepoints[i].name;
 
                 const number = document.createElement('p');
                 number.classList.add('timepoint-num');
-                number.textContent = counter;
+                number.textContent = i + 1;
 
                 timepointContainer.appendChild(number);
                 timepointContainer.appendChild(routeTimepoint);
@@ -129,7 +136,6 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
                 timepointList.appendChild(divider);
 
                 timepointList.appendChild(timepointContainer)
-                counter++;
             }
             newRoute.appendChild(timepointList);
         }
@@ -312,5 +318,59 @@ function geocode(input){
         }
     });
 }
+
+setInterval(function() {
+    const d = new Date();
+    const day = d.getDay();
+    const time = d.toLocaleTimeString('en-US', {hour12: false, hour: '2-digit', minute: '2-digit'});
+    let nextStop;
+    let nextStopIndex;
+
+    console.log("Running");
+    for (const route of stopList){
+        const startTime = route.timepoints[0].times[0];
+        const endTime = route.timepoints[route.timepoints.length - 1].times.slice(-1).toString();
+        const routeSelector = '[route-id="' + route.routeID.toLowerCase() + '"]';
+        let nextTime = endTime;
+        const routeCard = document.querySelector(routeSelector);
+        const stopText = routeCard.querySelector(".next-stop-name");
+        const ID = routeCard.querySelector(".route-id");
+        const minutes = routeCard.querySelector(".time-label");
+        const timeText = routeCard.querySelector(".time-left");
+        const indexText = routeCard.querySelector(".route-index");
+
+        if (!route.active.days.includes(day)){ // Route is inactive for today
+            routeCard.classList.add("inactive");
+            stopText.textContent = route.timepoints[0].name;
+            ID.style.backgroundColor = "#FFAA00";
+        } else if (time <= startTime || time >= endTime){ // Route is inactive at this time
+            routeCard.classList.add("inactive");
+            stopText.textContent = route.timepoints[0].name;
+            timeText.textContent = startTime;
+            minutes.textContent = "later today"
+            ID.style.backgroundColor = "#FFAA00";
+        } else { // Route is active
+            if (routeCard.classList.contains("inactive")){
+                routeCard.classList.remove("inactive");
+            }
+            ID.style.backgroundColor = "#509E2F";
+            minutes.textContent = "minutes";
+            for (let i = 0; i < route.timepoints.length; i++){
+                for (let j = 0; j < route.timepoints[i].times.length; j++){
+                    if (route.timepoints[i].times[j] >= time){
+                        if (route.timepoints[i].times[j] <= nextTime){
+                            nextTime = route.timepoints[i].times[j];
+                            nextStop = route.timepoints[i].name;
+                            nextStopIndex = i + 1;
+                        }
+                    }
+                }
+            }
+            stopText.textContent = nextStop;
+            timeText.textContent = nextTime.slice(3,5) - time.slice(3,5);
+            indexText.textContent = nextStopIndex;
+        }
+    }
+}, 60 * 1000)
 
 window.initMap = initMap;
