@@ -12,24 +12,48 @@
 </head>
 <body>
     <div class="container">
-        <div class="address-search single">
-            <div class="directions-graphic">
-                <span class="material-symbols-outlined scale-down">circle</span>
-                <span class="material-symbols-outlined">more_vert</span>
-                <span class="material-symbols-outlined scale-down">location_on</span>
-            </div>
-            <div class="searchbars">
-                <div class="searchbox" id="origin-search">
-                    <input type="text" class="searchbar" id="origin" value="Current Location">
-                    <button class="search-button">
-                        <span class="material-symbols-outlined">search</span>
-                    </button>
+        <div class="search-container">
+            <div class="address-search single">
+                <div class="directions-graphic">
+                    <span class="material-symbols-outlined scale-down">circle</span>
+                    <span class="material-symbols-outlined">more_vert</span>
+                    <span class="material-symbols-outlined scale-down">location_on</span>
                 </div>
-                <div class="searchbox" id="destination-search">
-                    <input type="text" class="searchbar" id="destination" placeholder="Enter a destination" onfocus="expandSearch()">
-                    <button class="search-button" id="destination-button">
-                        <span class="material-symbols-outlined">search</span>
-                    </button>
+                <div class="searchbars">
+                    <div class="searchbox" id="origin-search">
+                        <input type="text" class="searchbar" id="origin" value="Current Location">
+                        <button class="search-button">
+                            <span class="material-symbols-outlined">search</span>
+                        </button>
+                    </div>
+                    <div class="searchbox" id="destination-search">
+                        <input type="text" class="searchbar" id="destination" placeholder="Enter a destination" onfocus="expandSearch()">
+                        <button class="search-button" id="destination-button">
+                            <span class="material-symbols-outlined">search</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="route-rec">
+                <div class="route-rec-card">
+                    <div class="rec-header">
+                        <p>via</p>
+                        <h3>Mean Green</h3>
+                        <p class="route-id" style="background-color: rgb(80, 158, 47);">MG 114</p>
+                    </div>
+                    <p>Union Transfer (4th Stop)</p>
+                    <span class="material-symbols-outlined">more_vert</span>
+                    <p>GAB</p>
+                </div>
+                <div class="route-rec-card">
+                    <div class="rec-header">
+                        <p>via</p>
+                        <h3>Discovery Park</h3>
+                        <p class="route-id" style="background-color: rgb(80, 158, 47);">DP 144</p>
+                    </div>
+                    <p>Union Transfer (3rd Stop)</p>
+                    <span class="material-symbols-outlined">more_vert</span>
+                    <p>GAB</p>
                 </div>
             </div>
         </div>

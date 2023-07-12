@@ -173,6 +173,7 @@ function initMap() {
         places.forEach((place) => {
             destination = { "lat": place.geometry.location.lat(), "lng": place.geometry.location.lng() }
         })
+        findClosest();
     })
 
     const myStyles = [{
@@ -302,6 +303,31 @@ function expandCard(routeID){
     }
     const search = '[route-id="' + routeID + '"]';
     document.querySelector(search).classList.add("selected");
+}
+
+function findClosest(){
+    let distance;
+    for (const route of stopList){
+        for (const timepoint of route.timepoints){
+            distance = calculateDistance(timepoint.coordinates, destination)
+            if (distance <= 1.0 ){
+                console.log("Match: " + route.name + ": " + timepoint.name + ": " + distance);
+            }
+        }
+    }
+}
+
+function calculateDistance(loc1, loc2) {
+    const lat1 = loc1.lat;
+    const lat2 = loc2.lat;
+    const lon1 = loc1.lng;
+    const lon2 = loc2.lng;
+
+    const r = 6371;
+    const p = Math.PI / 180;
+    const a = 0.5 - Math.cos((lat2 - lat1) * p) / 2 + Math.cos(lat1 * p) * Math.cos(lat2 * p) * (1 - Math.cos((lon2 - lon1) * p)) / 2;
+    
+    return 2 * r * Math.asin(Math.sqrt(a));
 }
 
 setInterval(function() {

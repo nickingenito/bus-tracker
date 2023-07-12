@@ -25,6 +25,17 @@ body {
     align-items: center;
 }
 
+.search-container{
+    position: absolute;
+    z-index: 5;
+    top: 5px;
+    left: 5px;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .sidebar{
     height: 100vh;
     width: 25%;
@@ -37,17 +48,13 @@ body {
 }
 
 .address-search{
-    width: 30%;
+    width: 100%;
     height: auto;
     background-color: #262626;
     display: flex;
     flex-direction: row;
-    position: absolute;
     padding: .5rem;
     border-radius: 10px;
-    top: 5px;
-    left: 5px;
-    z-index: 5;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
@@ -84,6 +91,35 @@ body {
     width: 100%;
     height: 100%;
     position: relative;
+}
+
+.route-rec{
+    width: 100%;
+    height: auto;
+    background-color: #262626;
+    padding: .5rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.route-rec-card{
+    background-color: #333333;
+    box-shadow: 0px 0px 3px 0px #111;
+    border-radius: 2px;
+    padding: 10px;
+}
+
+.rec-header{
+    display: grid;
+    grid-template-columns: 8% 76% 16%;
+    align-items: center;
+}
+
+.hidden {
+    display: none;
 }
 
 .searchbar{
@@ -132,7 +168,6 @@ body {
     display: flex;
     flex-direction: column;
     text-align: left;
-    margin-bottom: 10px;
 }
 
 .selected {
@@ -206,9 +241,13 @@ body {
 
 #route-list{
     overflow: auto;
+    display: flex;
+    flex-direction: column;
     height: 100vh;
     width: 100%;
     margin-top: 6px;
+    gap: 10px;
+    margin-bottom: 10px;
 }
 
 .sidebar-search{
