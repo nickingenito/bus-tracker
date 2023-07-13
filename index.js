@@ -89,7 +89,7 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
                 }
             }
             stopText.textContent = nextStop;
-            timeText.textContent = ((nextTime.slice(0,1) * 60) + nextTime.slice(3,5)) - ((time.slice(0,1) * 60) + time.slice(3,5));
+            timeText.textContent = (Number((nextTime.slice(0,2) * 60)) + Number(nextTime.slice(3,5))) - (Number((time.slice(0,2) * 60)) + Number(time.slice(3,5)));
             indexText.textContent = nextStopIndex;
         }
 
@@ -471,7 +471,7 @@ setInterval(function() {
                 }
             }
             stopText.textContent = nextStop;
-            timeText.textContent = ((nextTime.slice(0,1) * 60) + nextTime.slice(3,5)) - ((time.slice(0,1) * 60) + time.slice(3,5));
+            timeText.textContent = (Number((nextTime.slice(0,2) * 60)) + Number(nextTime.slice(3,5))) - (Number((time.slice(0,2) * 60)) + Number(time.slice(3,5)));
             indexText.textContent = nextStopIndex;
         }
     }
