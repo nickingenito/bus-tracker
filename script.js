@@ -1,5 +1,3 @@
-let currentLocation;
-
 function toggleInactive(){
     const button = document.getElementById("toggle-inactive")
     const inactives = document.querySelectorAll(".inactive")
@@ -50,19 +48,4 @@ function closeSearch(){
         }
     }
 }
-
-function getCurrentLocation(){
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                currentLocation = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude,
-                };
-            }
-        );
-    }
-}
-
-getCurrentLocation();
     

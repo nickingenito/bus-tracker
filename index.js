@@ -1,7 +1,7 @@
 let markers = [];
 let stopList = [];
 let goodRoutes = [];
-let destination;
+let currentLocation;
 
 // Use Fetch API to load JSON file as objects for routes
 async function populate(map, directionsService, directionsRenderer) {
@@ -157,24 +157,38 @@ function initMap() {
             strokeWeight: 6
         }
     });
-    const input = document.getElementById("destination");
-
+    const destInput = document.getElementById("destination");
+    const origInput = document.getElementById("origin");
     const searchOptions = {
         componentRestrictions: { country: "us" },
     };
 
-    const searchBox = new google.maps.places.SearchBox(input, searchOptions);
-    searchBox.addListener("places_changed", () => {
-        const places = searchBox.getPlaces();
-
-        if (places.length == 0){
+    const destSearch = new google.maps.places.SearchBox(destInput, searchOptions);
+    const origSearch = new google.maps.places.SearchBox(origInput, searchOptions);
+    destSearch.addListener("places_changed", () => {
+        let destination;
+        let origin;
+        if (origInput.value == "Current Location"){
+            getCurrentLocation();
+            origin = currentLocation;
+        } else {
+            const origins = origSearch.getPlaces();
+            if (origins.length == 0){
+                return;
+            }
+            origins.forEach((place) => {
+                origin = { "lat": place.geometry.location.lat(), "lng": place.geometry.location.lng() }
+            });
+        }
+        const destinations = destSearch.getPlaces();
+        if (destinations.length == 0){
             return;
         }
-        places.forEach((place) => {
+        destinations.forEach((place) => {
             destination = { "lat": place.geometry.location.lat(), "lng": place.geometry.location.lng() }
         });
+        findClosest(origin, destination);
 
-        findClosest({ "lat" : 33.21128520875526, "lng" : -97.14619021951677 });
     });
 
     const myStyles = [{
@@ -306,7 +320,9 @@ function expandCard(routeID){
     document.querySelector(search).classList.add("selected");
 }
 
-function findClosest(origin){
+function findClosest(origin, destination){
+    console.log(origin);
+    console.log(destination);
     let distance;
     goodRoutes = [];
     const recList = document.getElementById("rec-list");
@@ -343,7 +359,7 @@ function findClosest(origin){
     }
     for (let i = 0; i < goodRoutes.length; i++){
         for (const route of stopList){
-            if(route.routeID == goodRoutes[i].id){
+            if(route.routeID == goodRoutes[i]?.id){
                 let minDistance = 1.0;
                 let minStop;
                 for (const timepoint of route.timepoints){
@@ -490,4 +506,18 @@ setInterval(function() {
     }
 }, 60 * 1000)
 
+function getCurrentLocation(){
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                currentLocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                };
+            }
+        );
+    }
+}
+
+getCurrentLocation();
 window.initMap = initMap;
