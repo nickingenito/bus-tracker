@@ -392,7 +392,7 @@ function findClosest(origin){
             destination.textContent = route.destinationStop;
             recCard.classList.add("route-rec-card");
             recHeader.classList.add("rec-header");
-            id.classList.add("route-idd");
+            id.classList.add("rec-id");
             id.style.backgroundColor = "#FFAA00";
 
             const divider = document.createElement('span');
@@ -401,11 +401,11 @@ function findClosest(origin){
     
             recHeader.appendChild(via);
             recHeader.appendChild(name);
-            recHeader.appendChild(id);
             recCard.appendChild(recHeader);
             recCard.appendChild(origin);
             recCard.appendChild(divider);
             recCard.appendChild(destination);
+            recCard.appendChild(id);
             recList.appendChild(recCard);
         }
     }
