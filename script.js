@@ -1,38 +1,5 @@
 let currentLocation;
 
-/*
-class Node {
-    constructor(val) {
-        this.value = val;
-        this.next = null;
-    }
-}
-
-class LinkedList {
-    constructor() {
-        this.head = null;
-        this.tail = null;
-    }
-    push(val) {
-        const newNode = new Node(val);
-        if (!this.head) {
-            this.head = newNode;
-            this.tail = newNode;
-        } else {
-            this.tail.next = newNode;
-            this.tail = newNode;
-        }
-        return this;
-    }
-    cycle() {
-        const temp = this.head;
-        this.head = this.head.next;
-        temp.next = null;
-        this.tail = temp;
-    }
-}
-*/
-
 function toggleInactive(){
     const button = document.getElementById("toggle-inactive")
     const inactives = document.querySelectorAll(".inactive")
@@ -65,11 +32,19 @@ function searchRoutes(){
 }
 
 function expandSearch(){
-    document.querySelector(".address-search").classList.toggle("single");
-    console.log(currentLocation);
+    document.querySelector(".address-search").classList.remove("single");
+    document.querySelector(".close-button").classList.remove("hidden");
 }
 
-async function getCurrentLocation(){
+function closeSearch(){
+    document.querySelector(".address-search").classList.add("single");
+    document.querySelector(".close-button").classList.add("hidden");
+    document.getElementById("rec-list").style.display="none";
+    document.getElementById("origin").value="Current Location";
+    document.getElementById("destination").value='';
+}
+
+function getCurrentLocation(){
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             (position) => {

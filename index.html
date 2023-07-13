@@ -13,7 +13,10 @@
 <body>
     <div class="container">
         <div class="search-container">
-            <div class="address-search">
+            <div class="address-search single">
+                <button class="close-button hidden" onclick="closeSearch()">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
                 <div class="directions-graphic">
                     <span class="material-symbols-outlined scale-down">circle</span>
                     <span class="material-symbols-outlined">more_vert</span>
@@ -21,13 +24,13 @@
                 </div>
                 <div class="searchbars">
                     <div class="searchbox" id="origin-search">
-                        <input type="text" class="searchbar" id="origin" value="Union Transfer">
+                        <input type="text" class="searchbar" id="origin" value="Current Location">
                         <button class="search-button">
                             <span class="material-symbols-outlined">search</span>
                         </button>
                     </div>
                     <div class="searchbox" id="destination-search">
-                        <input type="text" class="searchbar" id="destination" placeholder="Enter a destination">
+                        <input type="text" class="searchbar" id="destination" placeholder="Enter a destination" onfocus="expandSearch()">
                         <button class="search-button" id="destination-button">
                             <span class="material-symbols-outlined">search</span>
                         </button>

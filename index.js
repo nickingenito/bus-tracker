@@ -144,7 +144,7 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
     }
 }
 
-// Initiate map and load Google Maps services
+// Initialize map and load Google Maps services
 function initMap() {
     const directionsService = new google.maps.DirectionsService({
         avoidHighways: true
@@ -170,12 +170,12 @@ function initMap() {
         if (places.length == 0){
             return;
         }
-
         places.forEach((place) => {
             destination = { "lat": place.geometry.location.lat(), "lng": place.geometry.location.lng() }
-        })
+        });
+
         findClosest({ "lat" : 33.21128520875526, "lng" : -97.14619021951677 });
-    })
+    });
 
     const myStyles = [{
         featureType: "poi",
@@ -310,7 +310,7 @@ function findClosest(origin){
     let distance;
     goodRoutes = [];
     const recList = document.getElementById("rec-list");
-    while(recList.firstChild){
+    while (recList.firstChild){
         recList.removeChild(recList.firstChild);
     }
     for (const route of stopList){
@@ -369,6 +369,7 @@ function findClosest(origin){
             }
         }
     }
+    recList.style.display="flex";
     if (goodRoutes.length == 0){
         const searchError = document.createElement('p');
         searchError.textContent = "Unable to find a route with those search parameters."
@@ -410,6 +411,7 @@ function findClosest(origin){
     }
 }
 
+// Calculate distance between two LatLng coordinate objects
 function calculateDistance(loc1, loc2) {
     const lat1 = loc1.lat;
     const lat2 = loc2.lat;
