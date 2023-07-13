@@ -408,6 +408,17 @@ function findClosest(origin){
             recCard.appendChild(id);
             recList.appendChild(recCard);
         }
+        const routeCards = document.querySelectorAll(".route-card");
+        for (const card of routeCards){
+            card.style.display = "none";
+        }
+        for (const card of routeCards){
+            for (const route of goodRoutes){
+                if (card.getAttribute("route-id") == route.id.toLowerCase()){
+                    card.style.display = "flex";
+                }
+            }
+        }
     }
 }
 

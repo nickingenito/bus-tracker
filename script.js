@@ -42,6 +42,13 @@ function closeSearch(){
     document.getElementById("rec-list").style.display="none";
     document.getElementById("origin").value="Current Location";
     document.getElementById("destination").value='';
+
+    const routeCards = document.querySelectorAll(".route-card");
+    for (const card of routeCards){
+        if (!card.classList.contains("inactive")){
+            card.style.display = "flex";
+        }
+    }
 }
 
 function getCurrentLocation(){
