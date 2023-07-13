@@ -471,7 +471,7 @@ setInterval(function() {
                 }
             }
             stopText.textContent = nextStop;
-            timeText.textContent = nextTime.slice(3,5) - time.slice(3,5);
+            timeText.textContent = ((nextTime.slice(0,1) * 60) + nextTime.slice(3,5)) - ((time.slice(0,1) * 60) + time.slice(3,5));
             indexText.textContent = nextStopIndex;
         }
     }
