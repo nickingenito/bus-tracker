@@ -14,9 +14,6 @@
     <div class="container">
         <div class="search-container">
             <div class="address-search single">
-                <button class="close-button hidden" onclick="closeSearch()">
-                    <span class="material-symbols-outlined">close</span>
-                </button>
                 <div class="directions-graphic">
                     <span class="material-symbols-outlined scale-down">circle</span>
                     <span class="material-symbols-outlined">more_vert</span>
@@ -36,7 +33,11 @@
                         </button>
                     </div>
                 </div>
+                <button class="close-button hidden" onclick="closeSearch()" title="Close Search">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
             </div>
+
             <div id="rec-list"></div>
         </div>
         <div id="map"></div>
