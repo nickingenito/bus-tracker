@@ -229,10 +229,13 @@ body {
 }
 
 .timepoint-container{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 4px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 10% 65% 25%;
+}
+
+.timepoint-time{
+    justify-self: center;
 }
 
 .index-label{

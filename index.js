@@ -62,6 +62,7 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         const endTime = route.timepoints[route.timepoints.length - 1].times.slice(-1).toString();
         let nextStop;
         let nextStopIndex;
+        let nextTimeIndex;
         if(!route.active.enabled){ // Route is not enabled
             newRoute.classList.add("inactive");
             newID.style.backgroundColor = "#CC0000";
@@ -90,6 +91,7 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
                     if (route.timepoints[i].times[j] >= time){
                         if (route.timepoints[i].times[j] <= nextTime){
                             nextTime = route.timepoints[i].times[j];
+                            nextTimeIndex = j
                             nextStop = route.timepoints[i].name;
                             nextStopIndex = i + 1;
                         }
@@ -139,9 +141,41 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
                 number.classList.add('timepoint-num');
                 number.textContent = i + 1;
 
+                const nextTimepointTime = route.timepoints[i].times[nextTimeIndex];
+                const routeTimepointTime = document.createElement('p')
+                routeTimepointTime.textContent = nextTimepointTime;
+                routeTimepointTime.classList.add("timepoint-time");
+
                 labelContainer.appendChild(number);
                 timepointContainer.appendChild(labelContainer);
                 timepointContainer.appendChild(routeTimepoint);
+                timepointContainer.appendChild(routeTimepointTime);
+
+                timepointList.appendChild(timepointContainer)
+            }
+            for (let i = 0; i < nextStopIndex; i++){ //Repeat from start to show next cycle up to current position
+                const timepointContainer = document.createElement('div');
+                timepointContainer.classList.add("timepoint-container");
+
+                const labelContainer = document.createElement('div');
+                labelContainer.classList.add("index-label");
+
+                const routeTimepoint = document.createElement('p');
+                routeTimepoint.textContent = route.timepoints[i].name;
+
+                const number = document.createElement('p');
+                number.classList.add('timepoint-num');
+                number.textContent = i + 1;
+
+                const nextTimepointTime = route.timepoints[i].times[nextTimeIndex + 1];
+                const routeTimepointTime = document.createElement('p')
+                routeTimepointTime.textContent = nextTimepointTime;
+                routeTimepointTime.classList.add("timepoint-time");
+
+                labelContainer.appendChild(number);
+                timepointContainer.appendChild(labelContainer);
+                timepointContainer.appendChild(routeTimepoint);
+                timepointContainer.appendChild(routeTimepointTime);
 
                 timepointList.appendChild(timepointContainer)
             }
@@ -635,6 +669,7 @@ setInterval(function() {
     const time = d.toLocaleTimeString('en-US', {hour12: false, hour: '2-digit', minute: '2-digit'});
     let nextStop;
     let nextStopIndex;
+    let nextTimeIndex;
 
     console.log("Running interval update");
     for (const route of stopList){
@@ -647,7 +682,7 @@ setInterval(function() {
         const ID = routeCard.querySelector(".route-id");
         const minutes = routeCard.querySelector(".time-label");
         const timeText = routeCard.querySelector(".time-left");
-        const indexText = routeCard.querySelector(".route-index");
+        const indexText = routeCard.querySelector(".timepoint-num");
 
         if (!route.active.days.includes(day)){ // Route is inactive for today
             routeCard.classList.add("inactive");
@@ -675,15 +710,72 @@ setInterval(function() {
                         if (route.timepoints[i].times[j] <= nextTime){
                             nextTime = route.timepoints[i].times[j];
                             nextStop = route.timepoints[i].name;
+                            nextTimeIndex = j
                             nextStopIndex = i + 1;
                         }
                     }
                 }
             }
+            const timepointList = routeCard.querySelector(".timepoint-list");
+            while (timepointList.firstChild){
+                timepointList.removeChild(timepointList.firstChild);
+            }
+            for (let i = nextStopIndex; i < route.timepoints.length; i++){
+                const timepointContainer = document.createElement('div');
+                timepointContainer.classList.add("timepoint-container");
+
+                const labelContainer = document.createElement('div');
+                labelContainer.classList.add("index-label");
+
+                const routeTimepoint = document.createElement('p');
+                routeTimepoint.textContent = route.timepoints[i].name;
+
+                const number = document.createElement('p');
+                number.classList.add('timepoint-num');
+                number.textContent = i + 1;
+
+                const nextTimepointTime = route.timepoints[i].times[nextTimeIndex];
+                const routeTimepointTime = document.createElement('p')
+                routeTimepointTime.textContent = nextTimepointTime;
+                routeTimepointTime.classList.add("timepoint-time");
+
+                labelContainer.appendChild(number);
+                timepointContainer.appendChild(labelContainer);
+                timepointContainer.appendChild(routeTimepoint);
+                timepointContainer.appendChild(routeTimepointTime);
+
+                timepointList.appendChild(timepointContainer)
+            }
+            for (let i = 0; i < nextStopIndex; i++){ //Repeat from start to show next cycle up to current position
+                const timepointContainer = document.createElement('div');
+                timepointContainer.classList.add("timepoint-container");
+
+                const labelContainer = document.createElement('div');
+                labelContainer.classList.add("index-label");
+
+                const routeTimepoint = document.createElement('p');
+                routeTimepoint.textContent = route.timepoints[i].name;
+
+                const number = document.createElement('p');
+                number.classList.add('timepoint-num');
+                number.textContent = i + 1;
+
+                const nextTimepointTime = route.timepoints[i].times[nextTimeIndex + 1];
+                const routeTimepointTime = document.createElement('p')
+                routeTimepointTime.textContent = nextTimepointTime;
+                routeTimepointTime.classList.add("timepoint-time");
+
+                labelContainer.appendChild(number);
+                timepointContainer.appendChild(labelContainer);
+                timepointContainer.appendChild(routeTimepoint);
+                timepointContainer.appendChild(routeTimepointTime);
+
+                timepointList.appendChild(timepointContainer)
+            }
+        }
             stopText.textContent = nextStop;
             timeText.textContent = (Number((nextTime.slice(0,2) * 60)) + Number(nextTime.slice(3,5))) - (Number((time.slice(0,2) * 60)) + Number(time.slice(3,5)));
             indexText.textContent = nextStopIndex;
-        }
     }
 }, 60 * 1000)
 
