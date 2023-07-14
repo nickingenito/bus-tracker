@@ -46,6 +46,7 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         newID.classList.add("route-id");
         newHeader.classList.add("route-name")
         stopText.classList.add("next-stop-name");
+        stopText.classList.add("nowrap-text");
         minutes.classList.add("time-label");
         timeText.classList.add("time-left");
         indexText.classList.add("timepoint-num");
@@ -99,6 +100,7 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
                 }
             }
             stopText.textContent = nextStop;
+            stopText.classList.add("timepoint-text");
             timeText.textContent = (Number((nextTime.slice(0,2) * 60)) + Number(nextTime.slice(3,5))) - (Number((time.slice(0,2) * 60)) + Number(time.slice(3,5)));
             indexText.textContent = nextStopIndex;
         }
@@ -136,6 +138,7 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
 
                 const routeTimepoint = document.createElement('p');
                 routeTimepoint.textContent = route.timepoints[i].name;
+                routeTimepoint.classList.add("nowrap-text");
 
                 const number = document.createElement('p');
                 number.classList.add('timepoint-num');
@@ -162,6 +165,7 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
 
                 const routeTimepoint = document.createElement('p');
                 routeTimepoint.textContent = route.timepoints[i].name;
+                routeTimepoint.classList.add("nowrap-text");
 
                 const number = document.createElement('p');
                 number.classList.add('timepoint-num');
@@ -729,6 +733,7 @@ setInterval(function() {
 
                 const routeTimepoint = document.createElement('p');
                 routeTimepoint.textContent = route.timepoints[i].name;
+                routeTimepoint.classList.add("nowrap-text");
 
                 const number = document.createElement('p');
                 number.classList.add('timepoint-num');
@@ -755,6 +760,7 @@ setInterval(function() {
 
                 const routeTimepoint = document.createElement('p');
                 routeTimepoint.textContent = route.timepoints[i].name;
+                routeTimepoint.classList.add("nowrap-text");
 
                 const number = document.createElement('p');
                 number.classList.add('timepoint-num');
@@ -772,10 +778,10 @@ setInterval(function() {
 
                 timepointList.appendChild(timepointContainer)
             }
-        }
             stopText.textContent = nextStop;
             timeText.textContent = (Number((nextTime.slice(0,2) * 60)) + Number(nextTime.slice(3,5))) - (Number((time.slice(0,2) * 60)) + Number(time.slice(3,5)));
             indexText.textContent = nextStopIndex;
+        }
     }
 }, 60 * 1000)
 

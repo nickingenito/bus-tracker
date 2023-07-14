@@ -232,6 +232,21 @@ body {
     width: 100%;
     display: grid;
     grid-template-columns: 10% 65% 25%;
+    position: relative;
+    margin-top: 10px;
+}
+
+.nowrap-text{
+    text-overflow: clip;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.timepoint-container::before{
+    content: "|";
+    left: 7.5px;
+    position: absolute;
+    bottom: 15px;
 }
 
 .timepoint-time{
