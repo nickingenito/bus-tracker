@@ -70,7 +70,11 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
             newRoute.classList.add("inactive");
             stopText.textContent = route.timepoints[0].name;
             timeText.textContent = startTime;
-            minutes.textContent = "later today"
+            if (startTime < time){
+                minutes.textContent = "tomorrow";
+            } else {
+                minutes.textContent = "later today";
+            }
             newID.style.backgroundColor = "#FFAA00";
         } else { // Route is active
             newID.style.backgroundColor = "#509E2F";
@@ -165,7 +169,8 @@ function initMap() {
 
     const destSearch = new google.maps.places.SearchBox(destInput, searchOptions);
     const origSearch = new google.maps.places.SearchBox(origInput, searchOptions);
-    destSearch.addListener("places_changed", () => {
+    const searchButton = document.getElementById("search-button");
+    searchButton.addEventListener("click", () => {
         let destination;
         let origin;
         if (origInput.value == "Current Location"){
@@ -188,7 +193,6 @@ function initMap() {
             destination = { "lat": place.geometry.location.lat(), "lng": place.geometry.location.lng() }
         });
         findClosest(origin, destination);
-
     });
 
     const myStyles = [{
@@ -330,8 +334,14 @@ function findClosest(origin, destination){
         recList.removeChild(recList.firstChild);
     }
     for (const route of stopList){
-        let minDistance = 1.0;
+        let minDistance = 0.5;
         let minStop;
+        let routeActive = false;
+        const routeSelector = '[route-id="' + route.routeID.toLowerCase() + '"]';
+        const routeCard = document.querySelector(routeSelector);
+        if (!routeCard.classList.contains("inactive")){
+            routeActive = true;
+        }
         for (const timepoint of route.timepoints){
             distance = calculateDistance(timepoint.coordinates, destination)
             if (distance < minDistance ){
@@ -346,13 +356,15 @@ function findClosest(origin, destination){
                 minStop = stop.name;
             }
         }
-        if (minDistance < 1.0){
+        if (minDistance < 0.5){
             const bestStop = {
                 "name" : route.name,
                 "id" : route.routeID,
                 "originStop" : '',
+                "origDistance" : '',
                 "destinationStop" : minStop,
-                "distance" : minDistance
+                "destDistance" : minDistance,
+                "active" : routeActive
             }
             goodRoutes.push(bestStop);
         }
@@ -360,7 +372,7 @@ function findClosest(origin, destination){
     for (let i = 0; i < goodRoutes.length; i++){
         for (const route of stopList){
             if(route.routeID == goodRoutes[i]?.id){
-                let minDistance = 1.0;
+                let minDistance = 0.5;
                 let minStop;
                 for (const timepoint of route.timepoints){
                     distance = calculateDistance(timepoint.coordinates, origin)
@@ -376,11 +388,11 @@ function findClosest(origin, destination){
                         minStop = stop.name;
                     }
                 }
-                if (minDistance == 1.0){
+                if (minDistance == 0.5){
                     goodRoutes.splice(i,1);
                 } else {
                     goodRoutes[i].originStop = minStop;
-                    goodRoutes[i].distance += minDistance;
+                    goodRoutes[i].origDistance = minDistance;
                 }
             }
         }
@@ -391,8 +403,10 @@ function findClosest(origin, destination){
         searchError.textContent = "Unable to find a route with those search parameters."
         recList.appendChild(searchError);
     } else {
-        console.log(goodRoutes);
-        for (const route of goodRoutes){
+        let sortedRoutes = goodRoutes.sort(
+            (p1, p2) => ((p1.origDistance + p1.destDistance) > (p2.origDistance + p2.destDistance)) ? 1 : ((p1.origDistance + p1.destDistance) < (p2.origDistance + p2.destDistance)) ? -1 : 0
+        );
+        for (const route of sortedRoutes){
             const recCard = document.createElement('div');
             const recHeader = document.createElement('div');
             const via = document.createElement('p');
@@ -404,12 +418,16 @@ function findClosest(origin, destination){
             via.textContent = "via";
             name.textContent = route.name;
             id.textContent = route.id;
-            origin.textContent = route.originStop;
-            destination.textContent = route.destinationStop;
+            origin.textContent = route.originStop + " " + Math.ceil(route.origDistance * 15) + " min";
+            destination.textContent = route.destinationStop + " " + Math.ceil(route.destDistance * 15) + " min";
             recCard.classList.add("route-rec-card");
             recHeader.classList.add("rec-header");
             id.classList.add("rec-id");
-            id.style.backgroundColor = "#FFAA00";
+            if (route.active){
+                id.style.backgroundColor = "#509E2F";
+            } else {
+                id.style.backgroundColor = "#FFAA00";
+            }
 
             const divider = document.createElement('span');
             divider.classList.add('material-symbols-outlined')
