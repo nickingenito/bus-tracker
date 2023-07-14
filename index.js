@@ -1,6 +1,8 @@
 let markers = [];
 let stopList = [];
-let goodRoutes = [];
+let goodDestRoutes = [];
+let goodOrigRoutes = [];
+let goodRecRoutes = [];
 let currentLocation;
 
 // Use Fetch API to load JSON file as objects for routes
@@ -325,17 +327,20 @@ function expandCard(routeID){
 }
 
 function findClosest(origin, destination){
-    console.log(origin);
-    console.log(destination);
     let distance;
-    goodRoutes = [];
+    goodDestRoutes = [];
+    goodOrigRoutes = [];
+    goodRecRoutes = [];
     const recList = document.getElementById("rec-list");
+    recList.style.display="flex";
     while (recList.firstChild){
         recList.removeChild(recList.firstChild);
     }
     for (const route of stopList){
-        let minDistance = 0.5;
-        let minStop;
+        let minDestDistance = 0.5;
+        let minOrigDistance = 0.5;
+        let minDestStop;
+        let minOrigStop;
         let routeActive = false;
         const routeSelector = '[route-id="' + route.routeID.toLowerCase() + '"]';
         const routeCard = document.querySelector(routeSelector);
@@ -344,115 +349,92 @@ function findClosest(origin, destination){
         }
         for (const timepoint of route.timepoints){
             distance = calculateDistance(timepoint.coordinates, destination)
-            if (distance < minDistance ){
-                minDistance = distance
-                minStop = timepoint.name;
+            if (distance < minDestDistance ){
+                minDestDistance = distance
+                minDestStop = timepoint.name;
+            }
+            distance = calculateDistance(timepoint.coordinates, origin)
+            if (distance < minOrigDistance ){
+                minOrigDistance = distance
+                minOrigStop = timepoint.name;
             }
         }
         for (const stop of route.stops){
             distance = calculateDistance(stop.coordinates, destination)
-            if (distance < minDistance ){
-                minDistance = distance
-                minStop = stop.name;
+            if (distance < minDestDistance ){
+                minDestDistance = distance
+                minDestStop = stop.name;
+            }
+            distance = calculateDistance(stop.coordinates, origin)
+            if (distance < minOrigDistance ){
+                minOrigDistance = distance
+                minOrigStop = stop.name;
             }
         }
-        if (minDistance < 0.5){
-            const bestStop = {
+        if (minDestDistance < 0.5 && minOrigDistance < 0.5){ //Route is a valid recomendation
+            const validRoute = {
                 "name" : route.name,
                 "id" : route.routeID,
-                "originStop" : '',
-                "origDistance" : '',
-                "destinationStop" : minStop,
-                "destDistance" : minDistance,
+                "origStop" : minOrigStop,
+                "origDistance" : minOrigDistance,
+                "destStop" : minDestStop,
+                "destDistance" : minDestDistance,
                 "active" : routeActive
             }
-            goodRoutes.push(bestStop);
-        }
-    }
-    for (let i = 0; i < goodRoutes.length; i++){
-        for (const route of stopList){
-            if(route.routeID == goodRoutes[i]?.id){
-                let minDistance = 0.5;
-                let minStop;
-                for (const timepoint of route.timepoints){
-                    distance = calculateDistance(timepoint.coordinates, origin)
-                    if (distance < minDistance ){
-                        minDistance = distance
-                        minStop = timepoint.name;
-                    }
-                }
-                for (const stop of route.stops){
-                    distance = calculateDistance(stop.coordinates, origin)
-                    if (distance < minDistance ){
-                        minDistance = distance
-                        minStop = stop.name;
-                    }
-                }
-                if (minDistance == 0.5){
-                    goodRoutes.splice(i,1);
-                } else {
-                    goodRoutes[i].originStop = minStop;
-                    goodRoutes[i].origDistance = minDistance;
-                }
+            goodRecRoutes.push(validRoute);
+        } else if (minOrigDistance < 0.5){
+            const origRoute = {
+                "name" : route.name,
+                "id" : route.routeID,
+                "stop" : minOrigStop,
+                "distance" : minOrigDistance,
+                "active" : routeActive
             }
+            goodOrigRoutes.push(origRoute);
+        } else if (minDestDistance < 0.5){
+            const destRoute = {
+                "name" : route.name,
+                "id" : route.routeID,
+                "stop" : minDestStop,
+                "distance" : minDestDistance,
+                "active" : routeActive
+            }
+            goodDestRoutes.push(destRoute);
         }
     }
-    recList.style.display="flex";
-    if (goodRoutes.length == 0){
+    if (goodRecRoutes.length != 0){ //There is a non-transfer route
+        populateRecs(goodRecRoutes, false);
+        return;
+    } else if (goodDestRoutes.length == 0){ // There are no routes near destination
         const searchError = document.createElement('p');
-        searchError.textContent = "Unable to find a route with those search parameters."
+        searchError.textContent = "There are no routes near your destination."
         recList.appendChild(searchError);
-    } else {
-        let sortedRoutes = goodRoutes.sort(
-            (p1, p2) => ((p1.origDistance + p1.destDistance) > (p2.origDistance + p2.destDistance)) ? 1 : ((p1.origDistance + p1.destDistance) < (p2.origDistance + p2.destDistance)) ? -1 : 0
-        );
-        for (const route of sortedRoutes){
-            const recCard = document.createElement('div');
-            const recHeader = document.createElement('div');
-            const via = document.createElement('p');
-            const name = document.createElement('h3');
-            const id = document.createElement('p');
-            const origin = document.createElement('p');
-            const destination = document.createElement('p');
-    
-            via.textContent = "via";
-            name.textContent = route.name;
-            id.textContent = route.id;
-            origin.textContent = route.originStop + " " + Math.ceil(route.origDistance * 15) + " min";
-            destination.textContent = route.destinationStop + " " + Math.ceil(route.destDistance * 15) + " min";
-            recCard.classList.add("route-rec-card");
-            recHeader.classList.add("rec-header");
-            id.classList.add("rec-id");
-            if (route.active){
-                id.style.backgroundColor = "#509E2F";
-            } else {
-                id.style.backgroundColor = "#FFAA00";
-            }
-
-            const divider = document.createElement('span');
-            divider.classList.add('material-symbols-outlined')
-            divider.textContent = "more_vert"
-    
-            recHeader.appendChild(via);
-            recHeader.appendChild(name);
-            recCard.appendChild(recHeader);
-            recCard.appendChild(origin);
-            recCard.appendChild(divider);
-            recCard.appendChild(destination);
-            recCard.appendChild(id);
-            recList.appendChild(recCard);
-        }
-        const routeCards = document.querySelectorAll(".route-card");
-        for (const card of routeCards){
-            card.style.display = "none";
-        }
-        for (const card of routeCards){
-            for (const route of goodRoutes){
-                if (card.getAttribute("route-id") == route.id.toLowerCase()){
-                    card.style.display = "flex";
+        return;
+    } else if (goodOrigRoutes.length == 0){ // There are no routes near origin
+        const searchError = document.createElement('p');
+        searchError.textContent = "There are no routes near your origin."
+        recList.appendChild(searchError);
+        return;
+    } else { // There is a transfer route
+        console.log("transfer route");
+        for (const origRoute of goodOrigRoutes){
+            for (const destRoute of goodDestRoutes){
+                const transferRoute = {
+                    "origName" : origRoute.name,
+                    "destName" : destRoute.name,
+                    "origID" : origRoute.id,
+                    "destID" : destRoute.id,
+                    "origStop" : origRoute.stop,
+                    "destStop" : destRoute.stop,
+                    "origDistance" : origRoute.distance,
+                    "destDistance" : destRoute.distance,
+                    "origActive" : origRoute.active,
+                    "destActive" : destRoute.active
                 }
+                goodRecRoutes.push(transferRoute);
             }
         }
+        populateRecs(goodRecRoutes, true);
     }
 }
 
@@ -468,6 +450,162 @@ function calculateDistance(loc1, loc2) {
     const a = 0.5 - Math.cos((lat2 - lat1) * p) / 2 + Math.cos(lat1 * p) * Math.cos(lat2 * p) * (1 - Math.cos((lon2 - lon1) * p)) / 2;
     
     return 2 * r * Math.asin(Math.sqrt(a));
+}
+
+function populateRecs(goodRoutes, transfer){
+    const recList = document.getElementById("rec-list");
+    recList.style.display="flex";
+    let sortedRoutes = goodRoutes.sort(
+        (p1, p2) => ((p1.origDistance + p1.destDistance) > (p2.origDistance + p2.destDistance)) ? 1 : ((p1.origDistance + p1.destDistance) < (p2.origDistance + p2.destDistance)) ? -1 : 0
+    );
+    for (const route of sortedRoutes){
+        const recCard = document.createElement('div');
+        recCard.classList.add("route-rec-card");
+        const origWalk = document.createElement('div');
+        const origWalkText = document.createElement('p')
+        const destWalk = document.createElement('div');
+        const destWalkText = document.createElement('p')
+        const walkingIcon1 = document.createElement('span');
+        const walkingIcon2 = document.createElement('span');
+        const via = document.createElement('p');
+        const originText = document.createElement('p');
+        const busIcon1 = document.createElement('span');
+        const busIcon2 = document.createElement('span');
+        const destinationText = document.createElement('p');
+        const origin = document.createElement('div');
+        const destination = document.createElement('div');
+        const recContent = document.createElement('div');
+        recContent.classList.add("rec-content");
+
+        walkingIcon1.classList.add("material-symbols-outlined")
+        walkingIcon1.textContent = "directions_walk"
+        walkingIcon2.classList.add("material-symbols-outlined")
+        walkingIcon2.textContent = "directions_walk"
+        origWalk.classList.add("rec-icon");
+        origWalkText.textContent = Math.ceil(route.origDistance * 15) + " minute walk";
+        origWalk.appendChild(walkingIcon1);
+        origWalk.appendChild(origWalkText);
+        destWalk.classList.add("rec-icon");
+        destWalkText.textContent = Math.ceil(route.destDistance * 15) + " minute walk";
+        destWalk.appendChild(walkingIcon2);
+        destWalk.appendChild(destWalkText);
+
+        const divider = document.createElement('span');
+        divider.classList.add('material-symbols-outlined')
+        divider.textContent = "more_vert"
+
+        via.textContent = "via ";
+        origin.classList.add("rec-icon")
+        destination.classList.add("rec-icon")
+        originText.textContent = route.origStop;
+        destinationText.textContent = route.destStop;
+        busIcon1.classList.add("material-symbols-outlined")
+        busIcon1.textContent = "directions_bus"
+        busIcon2.classList.add("material-symbols-outlined")
+        busIcon2.textContent = "directions_bus"
+        origin.appendChild(busIcon1);
+        origin.appendChild(originText);
+        destination.appendChild(busIcon2);
+        destination.appendChild(destinationText);
+        
+        const recHeader = document.createElement('div');
+        const name = document.createElement('h3');
+        const id = document.createElement('p');
+        recHeader.classList.add("rec-header");
+        id.classList.add("rec-id");
+
+        if (transfer){
+            const recContent2 = document.createElement('div');
+            recContent2.classList.add("rec-content");
+            const recHeader2 = document.createElement('div');
+            const name2 = document.createElement('h3');
+            const id2 = document.createElement('p');
+            const via2 = document.createElement('p')
+            const busIcon3 = document.createElement('span');
+            const busIcon4 = document.createElement('span');
+            const union1 = document.createElement('div');
+            const union2 = document.createElement('div');
+            const unionText1 = document.createElement('p');
+            const unionText2 = document.createElement('p');
+            busIcon3.classList.add("material-symbols-outlined");
+            busIcon3.textContent = "directions_bus";
+            busIcon4.classList.add("material-symbols-outlined");
+            busIcon4.textContent = "directions_bus";
+            unionText1.textContent = "Union Transfer";
+            unionText2.textContent = "Union Transfer";
+            union1.classList.add("rec-icon");
+            union2.classList.add("rec-icon");
+            union1.appendChild(busIcon3);
+            union1.appendChild(unionText1);
+            union2.appendChild(busIcon4);
+            union2.appendChild(unionText2);
+            recHeader2.classList.add("rec-header");
+            id2.classList.add("rec-id");
+            if (route.origActive){
+                id.style.backgroundColor = "#509E2F";
+            } else {
+                id.style.backgroundColor = "#FFAA00";
+            }
+            if (route.destActive){
+                id2.style.backgroundColor = "#509E2F";
+            } else {
+                id2.style.backgroundColor = "#FFAA00";
+            }
+            name.textContent = route.origName;
+            id.textContent = route.origID;
+            name2.textContent = route.destName;
+            id2.textContent = route.destID;
+            via2.textContent = "then";
+            recHeader.appendChild(via);
+            recHeader.appendChild(name);
+            recCard.appendChild(recHeader);
+            recContent.appendChild(origWalk);
+            recContent.appendChild(origin);
+            recContent.appendChild(union1);
+            recContent.appendChild(id);
+            recCard.appendChild(recContent);
+
+            recHeader2.appendChild(via2);
+            recHeader2.appendChild(name2);
+            recCard.appendChild(recHeader2);
+            recContent2.appendChild(union2);
+            recContent2.appendChild(destination);
+            recContent2.appendChild(destWalk);
+            recContent2.appendChild(id2);
+            recCard.appendChild(recContent2);
+        } else {
+            name.textContent = route.name;
+            id.textContent = route.id;
+            if (route.active){
+                id.style.backgroundColor = "#509E2F";
+            } else {
+                id.style.backgroundColor = "#FFAA00";
+            }
+
+            recHeader.appendChild(via);
+            recHeader.appendChild(name);
+            recCard.appendChild(recHeader);
+            recContent.appendChild(origWalk);
+            recContent.appendChild(origin);
+            recContent.appendChild(destination);
+            recContent.appendChild(destWalk);
+            recContent.appendChild(id);
+            recCard.appendChild(recContent);
+        }
+       recList.appendChild(recCard);
+    }
+    const routeCards = document.querySelectorAll(".route-card");
+    for (const card of routeCards){
+        card.style.display = "none";
+    }
+    for (const card of routeCards){
+        for (const route of goodRoutes){
+            const id = card.getAttribute("route-id")
+            if (id == route.id?.toLowerCase() || id == route.destID?.toLowerCase() || id == route.origID?.toLowerCase() ){
+                card.style.display = "flex";
+            }
+        }
+    }
 }
 
 setInterval(function() {
@@ -498,7 +636,11 @@ setInterval(function() {
             routeCard.classList.add("inactive");
             stopText.textContent = route.timepoints[0].name;
             timeText.textContent = startTime;
-            minutes.textContent = "later today"
+            if (startTime < time){
+                minutes.textContent = "tomorrow";
+            } else {
+                minutes.textContent = "later today";
+            }
             ID.style.backgroundColor = "#FFAA00";
         } else { // Route is active
             if (routeCard.classList.contains("inactive")){
