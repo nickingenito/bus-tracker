@@ -233,12 +233,20 @@ body {
     flex-direction: row;
     align-items: center;
     gap: 4px;
-    margin-left: 8px;
+}
+
+.index-label{
+    width: 18px;
+    height: 18px;
+    display: block;
+    border: 1px solid white;
+    border-radius: 50%;
 }
 
 .timepoint-num{
-    width: 15px;
-    height: 15px;
+    width: 100%;
+    margin: auto;
+    text-align: center;
 }
 
 .content{
@@ -278,6 +286,7 @@ body {
     display: flex;
     flex-direction: row;
     gap: 4px;
+    align-items: center;
 }
 
 #route-list{

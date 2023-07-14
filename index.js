@@ -29,6 +29,7 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         const newID = document.createElement('p');
         const nextStopText = document.createElement('div');
         const stopText = document.createElement('p');
+        const indexContainer = document.createElement('div');
         const indexText = document.createElement('p');
         const timeText = document.createElement('h2');
         const minutes = document.createElement('p');
@@ -47,7 +48,8 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         stopText.classList.add("next-stop-name");
         minutes.classList.add("time-label");
         timeText.classList.add("time-left");
-        indexText.classList.add("route-index");
+        indexText.classList.add("timepoint-num");
+        indexContainer.classList.add("index-label");
 
         newRoute.setAttribute("route-id", route.routeID.toLowerCase());
         newRoute.setAttribute("route-name", route.name.toLowerCase());
@@ -111,7 +113,8 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         timeContainer.appendChild(minutes);
         newRoute.appendChild(newHeader);
         textContainer.appendChild(newID);
-        nextStopText.appendChild(indexText);
+        indexContainer.appendChild(indexText);
+        nextStopText.appendChild(indexContainer);
         nextStopText.appendChild(stopText);
         textContainer.appendChild(nextStopText);
         content.appendChild(textContainer);
@@ -126,6 +129,9 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
                 const timepointContainer = document.createElement('div');
                 timepointContainer.classList.add("timepoint-container");
 
+                const labelContainer = document.createElement('div');
+                labelContainer.classList.add("index-label");
+
                 const routeTimepoint = document.createElement('p');
                 routeTimepoint.textContent = route.timepoints[i].name;
 
@@ -133,13 +139,9 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
                 number.classList.add('timepoint-num');
                 number.textContent = i + 1;
 
-                timepointContainer.appendChild(number);
+                labelContainer.appendChild(number);
+                timepointContainer.appendChild(labelContainer);
                 timepointContainer.appendChild(routeTimepoint);
-
-                const divider = document.createElement('span');
-                divider.classList.add('material-symbols-outlined')
-                divider.textContent = "more_vert"
-                timepointList.appendChild(divider);
 
                 timepointList.appendChild(timepointContainer)
             }
