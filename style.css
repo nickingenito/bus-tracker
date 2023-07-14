@@ -148,8 +148,9 @@ body {
     margin-top: 2px;
     margin-bottom: 4px;
     position: absolute;
-    bottom: 6px;
-    right: 10px;
+    bottom: 0;
+    right: 0;
+
 }
 
 .rec-icon{
@@ -157,6 +158,8 @@ body {
     flex-direction: row;
     align-items: center;
     gap: 4px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .hidden {
