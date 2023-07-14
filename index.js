@@ -494,7 +494,7 @@ function populateRecs(goodRoutes, transfer){
         divider.classList.add('material-symbols-outlined')
         divider.textContent = "more_vert"
 
-        via.textContent = "via ";
+        via.textContent = "via";
         origin.classList.add("rec-icon")
         destination.classList.add("rec-icon")
         originText.textContent = route.origStop;
@@ -555,7 +555,7 @@ function populateRecs(goodRoutes, transfer){
             id.textContent = route.origID;
             name2.textContent = route.destName;
             id2.textContent = route.destID;
-            via2.textContent = "then";
+            via2.textContent = "via";
             recHeader.appendChild(via);
             recHeader.appendChild(name);
             recCard.appendChild(recHeader);

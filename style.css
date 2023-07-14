@@ -125,8 +125,9 @@ body {
 .rec-header{
     display: grid;
     grid-template-columns: 8% 92%;
-    align-items: center;
+    justify-items: start;
     margin-bottom: 4px;
+    align-items: center;
 }
 
 .rec-id{
