@@ -203,14 +203,33 @@ function initMap() {
         stylers: [{visibility: "off"} ]
     }];
 
+    const panoramaOptions = {
+        addressControlOptions: {
+            position: google.maps.ControlPosition.BOTTOM_CENTER,
+        },
+        visible: false,
+        enableCloseButton : true
+    }
+
     const mapOptions = {
         zoom: 15,
         center: { lat: 33.21128520875526, lng: -97.14619021951677 },
         styles: myStyles,
+        mapTypeControl: true,
+        mapTypeControlOptions: {
+            style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+            position: google.maps.ControlPosition.TOP_CENTER
+        },
     };
 
     const map = new google.maps.Map(document.getElementById("map"), mapOptions);
     directionsRenderer.setMap(map);
+    const panorama = map.getStreetView();
+    panorama.setOptions({
+        addressControlOptions: {
+            position: google.maps.ControlPosition.BOTTOM_CENTER
+        }
+    });
 
     // Read JSON file
     populate(map, directionsService, directionsRenderer);
