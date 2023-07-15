@@ -700,7 +700,11 @@ setInterval(function() {
 
     console.log("Running interval update");
     for (const route of stopList){
-        const startTime = route.timepoints[0].times[0];
+        let n = 0;
+        while (route.timepoints[n].times[0] == ""){
+            n++
+        }
+        const startTime = route.timepoints[n].times[0];
         const endTime = route.timepoints[route.timepoints.length - 1].times.slice(-1).toString();
         const routeSelector = '[route-id="' + route.routeID.toLowerCase() + '"]';
         let nextTime = endTime;
@@ -715,14 +719,18 @@ setInterval(function() {
             routeCard.classList.add("inactive");
             stopText.textContent = route.timepoints[0].name;
             ID.style.backgroundColor = "#FFAA00";
-            indexText.textContent = "1";
+            indexText.textContent = n + 1;
         } else if (time <= startTime || time >= endTime){ // Route is inactive at this time
             routeCard.classList.add("inactive");
             stopText.textContent = route.timepoints[0].name;
             timeText.textContent = startTime;
-            indexText.textContent = "1";
+            indexText.textContent = n + 1;
             if (startTime < time){
-                minutes.textContent = "tomorrow";
+                if (route.active.days.includes(day + 1)){
+                    minutes.textContent = "tomorrow";
+                } else {
+                    minutes.textContent = "Monday";
+                }
             } else {
                 minutes.textContent = "later today";
             }
@@ -777,31 +785,34 @@ setInterval(function() {
                 timepointList.appendChild(timepointContainer)
             }
             for (let i = 0; i < nextStopIndex; i++){ //Repeat from start to show next cycle up to current position
-                const timepointContainer = document.createElement('div');
-                timepointContainer.classList.add("timepoint-container");
-
-                const labelContainer = document.createElement('div');
-                labelContainer.classList.add("index-label");
-
-                const routeTimepoint = document.createElement('p');
-                routeTimepoint.textContent = route.timepoints[i].name;
-                routeTimepoint.classList.add("nowrap-text");
-
-                const number = document.createElement('p');
-                number.classList.add('timepoint-num');
-                number.textContent = i + 1;
-
                 const nextTimepointTime = route.timepoints[i].times[nextTimeIndex + 1];
-                const routeTimepointTime = document.createElement('p')
-                routeTimepointTime.textContent = nextTimepointTime;
-                routeTimepointTime.classList.add("timepoint-time");
-
-                labelContainer.appendChild(number);
-                timepointContainer.appendChild(labelContainer);
-                timepointContainer.appendChild(routeTimepoint);
-                timepointContainer.appendChild(routeTimepointTime);
-
-                timepointList.appendChild(timepointContainer)
+                if (nextTimepointTime){
+                    const timepointContainer = document.createElement('div');
+                    timepointContainer.classList.add("timepoint-container");
+    
+                    const labelContainer = document.createElement('div');
+                    labelContainer.classList.add("index-label");
+    
+                    const routeTimepoint = document.createElement('p');
+                    routeTimepoint.textContent = route.timepoints[i].name;
+                    routeTimepoint.classList.add("nowrap-text");
+    
+                    const number = document.createElement('p');
+                    number.classList.add('timepoint-num');
+                    number.textContent = i + 1;
+    
+                    const nextTimepointTime = route.timepoints[i].times[nextTimeIndex + 1];
+                    const routeTimepointTime = document.createElement('p')
+                    routeTimepointTime.textContent = nextTimepointTime;
+                    routeTimepointTime.classList.add("timepoint-time");
+    
+                    labelContainer.appendChild(number);
+                    timepointContainer.appendChild(labelContainer);
+                    timepointContainer.appendChild(routeTimepoint);
+                    timepointContainer.appendChild(routeTimepointTime);
+    
+                    timepointList.appendChild(timepointContainer)
+                }
             }
             stopText.textContent = nextStop;
             timeText.textContent = (Number((nextTime.slice(0,2) * 60)) + Number(nextTime.slice(3,5))) - (Number((time.slice(0,2) * 60)) + Number(time.slice(3,5)));
