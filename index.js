@@ -19,6 +19,9 @@ async function populate(map, directionsService, directionsRenderer) {
 //Access DOM and create route cards from JSON file
 function createRoutes(map, routes, directionsService, directionsRenderer){
     const container = document.getElementById('route-list');
+    const d = new Date();
+    const day = d.getDay();
+    const time = d.toLocaleTimeString('en-US', {hour12: false, hour: '2-digit', minute: '2-digit'});
 
     for (const route of routes){
         const content = document.createElement('div');
@@ -55,11 +58,12 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         newRoute.setAttribute("route-id", route.routeID.toLowerCase());
         newRoute.setAttribute("route-name", route.name.toLowerCase());
 
-        // Get current day and compare against route activity (getDay returns int)
-        const d = new Date();
-        const day = d.getDay();
-        const time = d.toLocaleTimeString('en-US', {hour12: false, hour: '2-digit', minute: '2-digit'});
-        const startTime = route.timepoints[0].times[0];
+        // use current day and compare against route activity (getDay returns int)
+        let n = 0;
+        while (route.timepoints[n].times[0] == ""){
+            n++
+        }
+        const startTime = route.timepoints[n].times[0]
         const endTime = route.timepoints[route.timepoints.length - 1].times.slice(-1).toString();
         let nextStop;
         let nextStopIndex;
@@ -73,18 +77,22 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
             newRoute.classList.add("inactive");
             stopText.textContent = route.timepoints[0].name;
             newID.style.backgroundColor = "#FFAA00";
-            indexText.textContent = "1";
+            indexText.textContent = n + 1;
         } else if (time <= startTime || time >= endTime){ // Route is inactive at this time
             newRoute.classList.add("inactive");
-            stopText.textContent = route.timepoints[0].name;
+            stopText.textContent = route.timepoints[n].name;
             timeText.textContent = startTime;
-            indexText.textContent = "1";
+            indexText.textContent = n + 1;
+            newID.style.backgroundColor = "#FFAA00";
             if (startTime < time){
-                minutes.textContent = "tomorrow";
+                if (route.active.days.includes(day + 1)){
+                    minutes.textContent = "tomorrow";
+                } else {
+                    minutes.textContent = "Monday";
+                }
             } else {
                 minutes.textContent = "later today";
-            }
-            newID.style.backgroundColor = "#FFAA00";
+                }
         } else { // Route is active
             newID.style.backgroundColor = "#509E2F";
             minutes.textContent = "minutes";
@@ -160,31 +168,33 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
                 timepointList.appendChild(timepointContainer)
             }
             for (let i = 0; i < nextStopIndex; i++){ //Repeat from start to show next cycle up to current position
-                const timepointContainer = document.createElement('div');
-                timepointContainer.classList.add("timepoint-container");
-
-                const labelContainer = document.createElement('div');
-                labelContainer.classList.add("index-label");
-
-                const routeTimepoint = document.createElement('p');
-                routeTimepoint.textContent = route.timepoints[i].name;
-                routeTimepoint.classList.add("nowrap-text");
-
-                const number = document.createElement('p');
-                number.classList.add('timepoint-num');
-                number.textContent = i + 1;
-
                 const nextTimepointTime = route.timepoints[i].times[nextTimeIndex + 1];
-                const routeTimepointTime = document.createElement('p')
-                routeTimepointTime.textContent = nextTimepointTime;
-                routeTimepointTime.classList.add("timepoint-time");
-
-                labelContainer.appendChild(number);
-                timepointContainer.appendChild(labelContainer);
-                timepointContainer.appendChild(routeTimepoint);
-                timepointContainer.appendChild(routeTimepointTime);
-
-                timepointList.appendChild(timepointContainer)
+                if (nextTimepointTime){
+                    const routeTimepointTime = document.createElement('p')
+                    routeTimepointTime.textContent = nextTimepointTime;
+                    routeTimepointTime.classList.add("timepoint-time");
+    
+                    const timepointContainer = document.createElement('div');
+                    timepointContainer.classList.add("timepoint-container");
+    
+                    const labelContainer = document.createElement('div');
+                    labelContainer.classList.add("index-label");
+    
+                    const routeTimepoint = document.createElement('p');
+                    routeTimepoint.textContent = route.timepoints[i].name;
+                    routeTimepoint.classList.add("nowrap-text");
+    
+                    const number = document.createElement('p');
+                    number.classList.add('timepoint-num');
+                    number.textContent = i + 1;
+    
+                    labelContainer.appendChild(number);
+                    timepointContainer.appendChild(labelContainer);
+                    timepointContainer.appendChild(routeTimepoint);
+                    timepointContainer.appendChild(routeTimepointTime);
+    
+                    timepointList.appendChild(timepointContainer)
+                }
             }
             newRoute.appendChild(timepointList);
         }
