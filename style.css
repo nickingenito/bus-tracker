@@ -60,7 +60,6 @@ body {
     padding: .5rem;
     border-radius: 10px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    position: relative;
 }
 
 .directions-graphic{
@@ -356,11 +355,19 @@ body {
     background-color: black;
 }
 
-.close-button{
+.tools {
+    display: none;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    width: 30px;
+    justify-content: space-evenly;
+    gap: 4px;
+}
+
+.tools button{
     background: none;
     border: none;
-    width: 16px;
-    height: 10px;
 }
 
 

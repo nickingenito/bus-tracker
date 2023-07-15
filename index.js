@@ -67,15 +67,18 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
         if(!route.active.enabled){ // Route is not enabled
             newRoute.classList.add("inactive");
             newID.style.backgroundColor = "#CC0000";
-            stopText.textContent = "Route is inactive for Summer 2023";
+            stopText.textContent = "Inactive for Summer 2023";
+            indexText.textContent = "!";
         } else if (!route.active.days.includes(day)){ // Route is inactive for today
             newRoute.classList.add("inactive");
             stopText.textContent = route.timepoints[0].name;
             newID.style.backgroundColor = "#FFAA00";
+            indexText.textContent = "1";
         } else if (time <= startTime || time >= endTime){ // Route is inactive at this time
             newRoute.classList.add("inactive");
             stopText.textContent = route.timepoints[0].name;
             timeText.textContent = startTime;
+            indexText.textContent = "1";
             if (startTime < time){
                 minutes.textContent = "tomorrow";
             } else {
@@ -192,6 +195,7 @@ function createRoutes(map, routes, directionsService, directionsRenderer){
 
 // Initialize map and load Google Maps services
 function initMap() {
+    const mapCenter = { lat: 33.21128520875526, lng: -97.14619021951677 };
     const directionsService = new google.maps.DirectionsService({
         avoidHighways: true
     });
@@ -205,10 +209,16 @@ function initMap() {
     });
     const destInput = document.getElementById("destination");
     const origInput = document.getElementById("origin");
-    const searchOptions = {
-        componentRestrictions: { country: "us" },
+    const defaultBounds = {
+        north: mapCenter.lat + 0.1,
+        south: mapCenter.lat + 0.1,
+        east: mapCenter.lng + 0.1,
+        west: mapCenter.lng + 0.1,
     };
-
+    const searchOptions = {
+        bounds: defaultBounds,
+        componentRestrictions: { country: ["us"] },
+    };
     const destSearch = new google.maps.places.SearchBox(destInput, searchOptions);
     const origSearch = new google.maps.places.SearchBox(origInput, searchOptions);
     const searchButton = document.getElementById("search-button");
@@ -220,7 +230,8 @@ function initMap() {
             origin = currentLocation;
         } else {
             const origins = origSearch.getPlaces();
-            if (origins.length == 0){
+            if (!origins){
+                alert("Error with search, select from autocomplete");
                 return;
             }
             origins.forEach((place) => {
@@ -228,7 +239,8 @@ function initMap() {
             });
         }
         const destinations = destSearch.getPlaces();
-        if (destinations.length == 0){
+        if (!destinations){
+            alert("Error with search, select from autocomplete");
             return;
         }
         destinations.forEach((place) => {
@@ -253,7 +265,7 @@ function initMap() {
 
     const mapOptions = {
         zoom: 15,
-        center: { lat: 33.21128520875526, lng: -97.14619021951677 },
+        center: mapCenter,
         styles: myStyles,
         mapTypeControl: true,
         mapTypeControlOptions: {
@@ -692,10 +704,12 @@ setInterval(function() {
             routeCard.classList.add("inactive");
             stopText.textContent = route.timepoints[0].name;
             ID.style.backgroundColor = "#FFAA00";
+            indexText.textContent = "1";
         } else if (time <= startTime || time >= endTime){ // Route is inactive at this time
             routeCard.classList.add("inactive");
             stopText.textContent = route.timepoints[0].name;
             timeText.textContent = startTime;
+            indexText.textContent = "1";
             if (startTime < time){
                 minutes.textContent = "tomorrow";
             } else {

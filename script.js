@@ -31,12 +31,17 @@ function searchRoutes(){
 
 function expandSearch(){
     document.querySelector(".address-search").classList.remove("single");
-    document.querySelector(".close-button").classList.remove("hidden");
+    document.querySelector(".tools").style.display="flex";
+}
+
+function refreshState(){
+    document.getElementById("destination").value='';
+    document.getElementById("origin").value="Current Location";
 }
 
 function closeSearch(){
     document.querySelector(".address-search").classList.add("single");
-    document.querySelector(".close-button").classList.add("hidden");
+    document.querySelector(".tools").style.display="none";
     document.getElementById("rec-list").style.display="none";
     document.getElementById("origin").value="Current Location";
     document.getElementById("destination").value='';

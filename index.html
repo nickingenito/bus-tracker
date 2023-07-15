@@ -25,14 +25,19 @@
                     </div>
                     <div class="searchbox" id="destination-search">
                         <input type="text" class="searchbar" id="destination" placeholder="Enter a destination" onfocus="expandSearch()">
-                        <button class="search-button" id="search-button">
-                            <span class="material-symbols-outlined">search</span>
-                        </button>
                     </div>
                 </div>
-                <button class="close-button hidden" onclick="closeSearch()" title="Close Search">
-                    <span class="material-symbols-outlined">close</span>
-                </button>
+                <div class="tools hidden">
+                    <button class="close-button" onclick="closeSearch()" title="Close Search">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                    <button class="refresh-button" onclick="refreshState()" title="Refresh Search">
+                        <span class="material-symbols-outlined">refresh</span>
+                    </button>
+                    <button class="search-button" id="search-button" title="Search for Routes">
+                        <span class="material-symbols-outlined">search</span>
+                    </button>
+                </div>
             </div>
 
             <div id="rec-list"></div>
