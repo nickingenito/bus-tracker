@@ -220,12 +220,13 @@ function initMap() {
         componentRestrictions: { country: ["us"] },
     };
     const destSearch = new google.maps.places.SearchBox(destInput, searchOptions);
+    const originBox = document.getElementById("origin");
     const origSearch = new google.maps.places.SearchBox(origInput, searchOptions);
     const searchButton = document.getElementById("search-button");
     searchButton.addEventListener("click", () => {
         let destination;
         let origin;
-        if (origInput.value == "Current Location"){
+        if (origInput.value == ''){
             getCurrentLocation();
             origin = currentLocation;
         } else {

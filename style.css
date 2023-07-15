@@ -343,6 +343,10 @@ body {
     width: 100%;
 }
 
+#origin::placeholder{
+    color: white;
+}
+
 .pac-container{
     background-color: #333333;
 }

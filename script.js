@@ -36,14 +36,14 @@ function expandSearch(){
 
 function refreshState(){
     document.getElementById("destination").value='';
-    document.getElementById("origin").value="Current Location";
+    document.getElementById("origin").value='';
 }
 
 function closeSearch(){
     document.querySelector(".address-search").classList.add("single");
     document.querySelector(".tools").style.display="none";
     document.getElementById("rec-list").style.display="none";
-    document.getElementById("origin").value="Current Location";
+    document.getElementById("origin").value='';
     document.getElementById("destination").value='';
 
     const routeCards = document.querySelectorAll(".route-card");
